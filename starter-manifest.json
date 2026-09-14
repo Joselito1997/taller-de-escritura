@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-10-25-what-makes-a-scene.md",
+      "sha256": "5e84eb1db518b04d6158d22bc1c310acfd933af32d6350eec8c0e32f3a1c6100",
+      "source_url": "https://writingexcuses.com/writing-excuses-10-25-what-makes-a-scene/",
+      "captured_at": "2026-09-13T20:12:20.897774+00:00",
+      "source_sha256": "d1038770775ca28f15cbfc4318e3a2b930488327e80d09a0138a0293658d0ea5",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "capitulos"
+    },
+    {
+      "path": "libro/investigacion/fuentes/brandon-sandersons-2025-guide-to-plot-lecture-2.md",
+      "sha256": "817f3f2f0f961c35942949410ea5017865bdb7649fdb34a0321f79032eecb06c",
+      "source_url": "https://www.brandonsanderson.com/blogs/blog/brandon-sandersons-2025-guide-to-plot-lecture-2",
+      "captured_at": "2026-09-13T20:12:20.898126+00:00",
+      "source_sha256": "3f738d3c74e21200d4340da2de18b2ed586f3856ca3af4fab35a45b1809fb676",
+      "provenance": "Nota española original; artículo completo leído el 2026-09-13; vídeo no visto",
+      "reuse_status": "link-only",
+      "route": "capitulos"
+    },
+    {
+      "path": "libro/investigacion/fuentes/pace-fiction-scene-sequel.md",
+      "sha256": "1081368e9d138307385fbee60a242fa64d5d1a782b63ce5de1cc8a27db86675e",
+      "source_url": "https://mikeklaassen.com/2022/01/pace-fiction-scene-sequel/",
+      "captured_at": null,
+      "source_sha256": null,
+      "provenance": "Nota española original; artículo completo leído en copia de Internet Archive del 2026-05-16; URL original 404",
+      "reuse_status": "link-only",
+      "route": "capitulos"
+    },
+    {
+      "path": "libro/investigacion/fuentes/12-9-qa-on-viewpoint.md",
+      "sha256": "a2208149f4656d5634940858f967323d90a72077e59235e4d83598430f589d48",
+      "source_url": "https://writingexcuses.com/12-9-qa-on-viewpoint/",
+      "captured_at": "2026-09-13T20:12:20.898263+00:00",
+      "source_sha256": "4571f35f3c4ce5cdb984dd433717139ef7adbf5b8233cbf4d07ede91937c56ac",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "perspectiva"
+    },
+    {
+      "path": "libro/investigacion/fuentes/17-31-everyone-has-an-agenda.md",
+      "sha256": "58654f28ea56e33f65fdb420e674e64fafd9eeb21494e825d9d2436c15e04fe3",
+      "source_url": "https://writingexcuses.com/17-31-everyone-has-an-agenda/",
+      "captured_at": "2026-09-13T20:12:20.898310+00:00",
+      "source_sha256": "40d569e0ac0d9c095786659a6e6da6281eec004ce526471dee5a01be91d43459",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "dialogo"
+    },
+    {
+      "path": "libro/investigacion/fuentes/16-41-middles-and-conflicts.md",
+      "sha256": "d11b502c1ecb6585cccab679f907833fbcc1ca0f34cc208a3910aef8028ea250",
+      "source_url": "https://writingexcuses.com/16-41-middles-and-conflicts/",
+      "captured_at": "2026-09-13T20:12:20.898352+00:00",
+      "source_sha256": "cdd1056cf4795d781464f19695f3513cca10ea41f87661ff1eed5ed0be9c9a5c",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "capitulos"
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-10-19-intrigue.md",
+      "sha256": "0d2ef705c42a4ae19a205d6f232373b0d8e7023222dbe313ec2f1124d0daac5d",
+      "source_url": "https://writingexcuses.com/writing-excuses-10-19-intrigue/",
+      "captured_at": "2026-09-13T20:12:21.238156+00:00",
+      "source_sha256": "d1b2fc25ab89cca7acb70617d70dc29d0ca102bd6dd952ed44035f788f5b51c7",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "capitulos"
+    },
+    {
+      "path": "libro/investigacion/fuentes/20-07-lens-3-identity-2-motivation-goals.md",
+      "sha256": "040915bedf604b4081cdc04d8cf537a24fdd762aae8f0c2839f5484b01c4049b",
+      "source_url": "https://writingexcuses.com/20-07-lens-3-identity-2-motivation-goals/",
+      "captured_at": "2026-09-13T20:12:21.275753+00:00",
+      "source_sha256": "4a49d72649023daa36cc8a662cbeca6274f589ede717a13d0d041f6651d94036",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "arcos"
+    },
+    {
+      "path": "libro/investigacion/fuentes/13-22-character-arcs.md",
+      "sha256": "b8969fc46f87457191f07f72940f022d350b69c3504fff1c9f7cef5d03eb34f4",
+      "source_url": "https://writingexcuses.com/13-22-character-arcs/",
+      "captured_at": "2026-09-13T20:12:21.448468+00:00",
+      "source_sha256": "25d7859436f46ed813d3dc19a7860730bd991407cbe982dc7ff7d51863f76548",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "arcos"
+    },
+    {
+      "path": "libro/investigacion/fuentes/customizing-your-character-brandon-sandersons-writing-lecture-6-2025.md",
+      "sha256": "49506242684b2d1b4265d0e899f2d0890599c90a3af6e161aaf5981028ba8170",
+      "source_url": "https://www.brandonsanderson.com/blogs/blog/customizing-your-character-brandon-sandersons-writing-lecture-6-2025",
+      "captured_at": "2026-09-13T20:12:21.489186+00:00",
+      "source_sha256": "eb45672d4c07948e99fdf5de7a47bd3da359b6a4de3b836b7fbd39057da9f71d",
+      "provenance": "Nota española original; artículo completo leído el 2026-09-13; vídeo no visto",
+      "reuse_status": "link-only",
+      "route": "arcos"
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-10-2-i-have-an-idea-what-do-i-do-now.md",
+      "sha256": "e440907d01e535bec4de5356bc9812503bd054a1c917658de4f80036003bffb8",
+      "source_url": "https://writingexcuses.com/writing-excuses-10-2-i-have-an-idea-what-do-i-do-now/",
+      "captured_at": "2026-09-13T20:12:21.535575+00:00",
+      "source_sha256": "36afea51f29e302fe66e705bbdd2a87e7f549933f910169a0b82703ee0994b9b",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "alternativas"
+    },
+    {
+      "path": "libro/investigacion/fuentes/11-13-elemental-idea-qa.md",
+      "sha256": "b82c6de9b1bf772943a16e2cdf2944f20154c33e21aee39f89ba62e9c1c9de70",
+      "source_url": "https://writingexcuses.com/11-13-elemental-idea-qa/",
+      "captured_at": "2026-09-13T20:12:21.554970+00:00",
+      "source_sha256": "80959848faecefaf26984debf032cb015922437cbbefbe77cba2f6290b454f6a",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "alternativas"
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-10-44-how-do-i-fix-what-is-broken.md",
+      "sha256": "a6ed8364ac0a2b52c8eb2575187ee9b559624a945c79ba45a4659fcb09ca75fd",
+      "source_url": "https://writingexcuses.com/writing-excuses-10-44-how-do-i-fix-what-is-broken/",
+      "captured_at": "2026-09-13T20:12:21.638618+00:00",
+      "source_sha256": "ee58490c78ad140ead66770bcde43a568ef6e747bdaa542bbe60c9df884b88e0",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "revision"
+    },
+    {
+      "path": "libro/investigacion/fuentes/1905-live-recording-revisions-with-mahtab-narsimhan.md",
+      "sha256": "b54c5506d0cefe888bc78c44693bf7502b09569c85bb1c93460adba549fea10e",
+      "source_url": "https://writingexcuses.com/1905-live-recording-revisions-with-mahtab-narsimhan/",
+      "captured_at": "2026-09-13T20:12:21.783367+00:00",
+      "source_sha256": "d94634ed98fcd8efe68f28f803f1e60cb7f404a210d7e47fcba0016f7f36412b",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "revision"
+    },
+    {
+      "path": "libro/investigacion/fuentes/14-35-what-you-leave-out.md",
+      "sha256": "93b3eca2dcb1633d7915fc724f84f9ab05b1b203b693040b99fa191f4ec8945b",
+      "source_url": "https://writingexcuses.com/14-35-what-you-leave-out/",
+      "captured_at": "2026-09-13T20:12:21.820813+00:00",
+      "source_sha256": "983b434cfd6719130c3d2ad7c768eab9f4ea595678e50392d0d62c05764a3198",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "mundo"
+    },
+    {
+      "path": "libro/investigacion/fuentes/sandersons-second-law.md",
+      "sha256": "8d9cd72d63dd2f987da30765499f93383b4e52685300aca3b7ef9fe4143e5dc8",
+      "source_url": "https://www.brandonsanderson.com/blogs/blog/sandersons-second-law",
+      "captured_at": "2026-09-13T20:12:21.904655+00:00",
+      "source_sha256": "0dafb9d4518eb7cf1bab7f2ebb6f97522a318189871b46c5ef8b5fb23da314cf",
+      "provenance": "Nota española original; ensayo completo leído el 2026-09-13",
+      "reuse_status": "link-only",
+      "route": "mundo"
+    },
+    {
+      "path": "libro/investigacion/fuentes/16-43-the-narrative-holy-trinity-of-world-character-and-plot-with-fonda-lee.md",
+      "sha256": "2dd9e561593d15bbd01aa423fa7c16933cc22922cf87477ac364dba2be8ea78e",
+      "source_url": "https://writingexcuses.com/16-43-the-narrative-holy-trinity-of-world-character-and-plot-with-fonda-lee/",
+      "captured_at": "2026-09-13T20:12:21.932216+00:00",
+      "source_sha256": "fd530bc485cb1c4ead212d78d7f956faf0c87bed190ec24afa540292eede1011",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "mundo"
+    },
+    {
+      "path": "libro/investigacion/fuentes/17-29-the-job-of-dialogue.md",
+      "sha256": "f9574072007bd0bf01a78ff600c569db7b934658f7943cd81d58a85238ea7912",
+      "source_url": "https://writingexcuses.com/17-29-the-job-of-dialogue/",
+      "captured_at": "2026-09-13T20:12:21.944522+00:00",
+      "source_sha256": "d9f826f1be3a6710b4d3454bd53abdb696272f9c367f72daa7182f9d05ea9575",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "dialogo"
+    },
+    {
+      "path": "libro/investigacion/fuentes/17-30-know-your-characters.md",
+      "sha256": "777fe051bb379bb87b011eedcd7db41bfd45cbba08f2a52e5a322d4f5f56eb05",
+      "source_url": "https://writingexcuses.com/17-30-know-your-characters/",
+      "captured_at": "2026-09-13T20:12:22.078267+00:00",
+      "source_sha256": "f5163ebe62f32c1b2706f18f923f077e319cc4606262a70ef1b3199bb68992ae",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "dialogo"
+    },
+    {
+      "path": "libro/investigacion/fuentes/17-34-developing-subtext.md",
+      "sha256": "a208a2bb85e92a2b4260bf1bce7e5987ce6b3c72b1dc1ba91d0348b005fdb06b",
+      "source_url": "https://writingexcuses.com/17-34-developing-subtext/",
+      "captured_at": "2026-09-13T20:12:22.153369+00:00",
+      "source_sha256": "bf8e66f69f4eb1a8308eac25cf8b891b3983f50f3fa2c51606a5c6618f84456d",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "dialogo"
+    },
+    {
+      "path": "libro/investigacion/fuentes/13-45-next-level-narration.md",
+      "sha256": "f754765df4ac74be58724fb9531db627497127d04a1e98f15808e06c99ae33e0",
+      "source_url": "https://writingexcuses.com/13-45-next-level-narration/",
+      "captured_at": "2026-09-13T20:12:22.330703+00:00",
+      "source_sha256": "1d930ffba45c89bfaaf4f1042d59a40e4311266c53080cca17a85f8dbaf2d531",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "perspectiva"
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-10-23-can-you-tell-me-how-to-show.md",
+      "sha256": "482a51865ee61148da8657f0c123ae357a24b83b308f15722a5c5b3deda64f2a",
+      "source_url": "https://writingexcuses.com/writing-excuses-10-23-can-you-tell-me-how-to-show/",
+      "captured_at": "2026-09-13T20:12:22.410064+00:00",
+      "source_sha256": "3bf3c24cc5171bd80a64e62edfab98d3facfbc826758d0c106f95632412ba216",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "perspectiva"
+    },
+    {
+      "path": "libro/investigacion/fuentes/12-10-developing-your-own-personal-style.md",
+      "sha256": "e674880b282374db5b1ace67a6c811836a79c53bf2bb17d61f8b8cc54b15fb4c",
+      "source_url": "https://writingexcuses.com/12-10-developing-your-own-personal-style/",
+      "captured_at": "2026-09-13T20:12:22.421434+00:00",
+      "source_sha256": "a055703b9c1acf452c5daf40dddfb4f135b2d080afa7c09bd44d7089816c9831",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "voz"
+    },
+    {
+      "path": "libro/investigacion/fuentes/12-17-qa-on-style-diction-and-paragraphing.md",
+      "sha256": "a48f7b973c44f0356ab1fb409987749270f9871f13f263a858732ab0d971eb9e",
+      "source_url": "https://writingexcuses.com/12-17-qa-on-style-diction-and-paragraphing/",
+      "captured_at": "2026-09-13T20:12:22.484414+00:00",
+      "source_sha256": "5d0cecbb02b9b6fa5664fe610e72c475ca591c29735d558295b008b3b52d51af",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "voz"
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-7-5-sensory-writing.md",
+      "sha256": "3bed736708c03555db6c5f2ea9d544f9b72208b907d7dcf8383ebeb8c9efaa38",
+      "source_url": "https://writingexcuses.com/writing-excuses-7-5-sensory-writing/",
+      "captured_at": "2026-09-13T20:12:22.567600+00:00",
+      "source_sha256": "90ae9c0d0256eec54af3814aed775aca8470898bd074218783d77f10e4ae3537",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "atmosfera"
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-10-32-how-do-i-control-the-speed-of-the-story.md",
+      "sha256": "a82f780f99aa71350d01f894b2ce8e955066782802a0a358633320184cf96436",
+      "source_url": "https://writingexcuses.com/writing-excuses-10-32-how-do-i-control-the-speed-of-the-story/",
+      "captured_at": "2026-09-13T20:12:22.640395+00:00",
+      "source_sha256": "b4632be48b5eb1b6320d5773aa0d20c4132829da5c8eec5971b3b90f55a560b8",
+      "provenance": "Nota española original; transcripción publicada leída completa el 2026-09-13; audio no escuchado",
+      "reuse_status": "link-only",
+      "route": "ritmo"
+    },
+    {
+      "path": "libro/investigacion/fuentes/ai-2027.md",
+      "sha256": "194e2e621aa1c9480ef52aebfa14a60b866419f4fb48ed6d2a5f2b9f3c75b015",
+      "source_url": "https://ai-2027.com",
+      "captured_at": "2026-09-13T20:13:04.316636+00:00",
+      "source_sha256": "7c7c672f66bc683369c0912c652edff2ac92eda358db246064d6ade7d6d62525",
+      "provenance": "Nota española original; PDF completo leído el 2026-09-13; edición interactiva y suplementos no leídos",
+      "reuse_status": "link-only",
+      "route": "escenarios"
+    },
+    {
+      "path": "libro/investigacion/fuentes/ai-2040.md",
+      "sha256": "0a69d65597aecf24f8ae0f0cad27168ea02b84128a16a1503b56175a3f7b7e5f",
+      "source_url": "https://ai-2040.com",
+      "captured_at": "2026-09-13T20:13:04.630897+00:00",
+      "source_sha256": "1f88c4d9847e4481118982400f25a5ced67a173dcfd049e914aefca6c2058924",
+      "provenance": "Nota española original; PDF completo leído el 2026-09-13; edición interactiva y suplementos no leídos",
+      "reuse_status": "link-only",
+      "route": "escenarios"
+    },
+    {
+      "path": "libro/investigacion/fuentes/machines-of-loving-grace.md",
+      "sha256": "e95ebd15f39c44da479b5519300efdbd89836c96321e9344fb658fa1d7f22ef6",
+      "source_url": "https://darioamodei.com/essay/machines-of-loving-grace",
+      "captured_at": "2026-09-13T20:12:23.108462+00:00",
+      "source_sha256": "2c2e3873897cc57e97c21a448d8bcd2972255a1fcdf470f45181d0d038661097",
+      "provenance": "Nota española original; ensayo completo leído el 2026-09-13; obras citadas no revisadas",
+      "reuse_status": "link-only",
+      "route": "beneficios"
+    },
+    {
+      "path": "libro/investigacion/indice.md",
+      "sha256": "1ce6e6f1c7ef74373eff9319ad730d617a33ccb3dd6c616dbab1fbaa2a9ad442",
+      "source_url": null,
+      "captured_at": null,
+      "provenance": "Rutas de lectura originales en español",
+      "reuse_status": "link-only"
+    }
+  ]
+}

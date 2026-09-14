@@ -1,0 +1,30 @@
+# Archivos locales, secretos y resultados de uso. Esto no deja de rastrear archivos ya publicados.
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.env.*
+/dist/
+/development/.runtime/
+/libro/.writing/
+/libro/.claudian/
+/libro/.obsidian/
+/libro/.claude/settings.local.json
+/libro/.claude/settings.json
+/libro/.mcp.local.json
+/libro/exportaciones/
+/libro/importaciones/originales/
+/libro/importaciones/derivados/
+/libro/investigacion/originales/
+/libro/investigacion/derivados/
+/libro/manuscrito/*.md
+!/libro/manuscrito/indice.md
+/libro/historia/
+/libro/planes/
+/libro/alternativas/
+/libro/bitacora/
+
+# Preparación local del destinatario.
+.installer/
+/installation-result.json

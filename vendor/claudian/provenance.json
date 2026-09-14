@@ -1,0 +1,48 @@
+{
+  "build": "2.2.6-es.4",
+  "upstream": {
+    "repository": "https://github.com/YishenTu/claudian",
+    "version": "2.2.6",
+    "tagObject": "4db38353c197b493913d7c8fa04361f1b07b815d",
+    "commit": "8b9d499ba92b0e4d0044782ef9c14a565b034cb7",
+    "archiveUrl": "https://codeload.github.com/YishenTu/claudian/tar.gz/8b9d499ba92b0e4d0044782ef9c14a565b034cb7",
+    "license": "MIT"
+  },
+  "coordinatorBase": "a75b2703ec558a1166d15332477ccaa483ab890e",
+  "buildEnvironment": {
+    "os": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64",
+    "node": "v24.13.0",
+    "npm": "11.6.2",
+    "python": "3.14.7"
+  },
+  "sha256": {
+    "upstream.tar.gz": "3f8a8a5936d5335ced33ae52aa1b6f3d52ac7087d32f6f2122dacdbe6000072c",
+    "spanish-ui.patch": "e28d367e32e211369ed928863dcc2f20675f9d6248d85b2ea5e2ab0a9e09f62d",
+    "LICENSE": "3bed3331b7048bac17cf50e249d560ccc9508c970da8d7b9283bf4f2e633a91d",
+    "THIRD_PARTY_NOTICES.md": "efcf56f4ce71246743421f7e65feb574c18dc490b1dc3331bbe092e574184a99",
+    "plugin/main.js": "1f97c1fef808434b87c1c1d033033afb65bdd44eb7747db92a4eef03732bdcea",
+    "plugin/manifest.json": "03daf2c5d330768f4b5b28f8426a4a9c2061c1f05137455d40ff95077199059a",
+    "plugin/styles.css": "e9e77a6d919ab4d30aa0dc21bcaaed3f92d66640a73437b5920c1958796fdf21"
+  },
+  "upstreamPackageLockSha256": "5a656698de0867c202d765efab4a9877a42ba1863b22df2d08578a00d357bea3",
+  "secondCleanBuild": {
+    "independentExtraction": true,
+    "independentNpmCi": true,
+    "command": "python3 vendor/claudian/rebuild.py --output /tmp/claudian-es4-independent-ctx-7daaf7f351c5",
+    "exitCode": 0,
+    "identicalFiles": [
+      "main.js",
+      "manifest.json",
+      "styles.css"
+    ]
+  },
+  "uiStatus": "Pendiente de instalación y pruebas del trabajador de interfaz",
+  "permissionSemantics": "Sin cambios; solo textos de presentación",
+  "previousBuild": "2.2.6-es.3",
+  "findingPacket": {
+    "commit": "889ead5558bba0169bf416d4f5506a17547770c0",
+    "path": "development/evidence/ui/claudian-es3-findings.md",
+    "sha256": "bae101d8bc9a3a1b08a34aa377f1fa53bd921fb9b73baf2462ea11d3ffb4157a"
+  }
+}

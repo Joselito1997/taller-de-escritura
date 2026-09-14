@@ -1,0 +1,71 @@
+{
+  "upstream": "https://github.com/community-archive/obsidian-kanban",
+  "tag": "2.0.51",
+  "commit": "8501981a1afacb4c8fc03ec60604aa5eedfbd857",
+  "observed_at": "2026-09-12T00:17:37.670632+00:00",
+  "upstream_latest": "2.0.51",
+  "upstream_archive": {
+    "path": "upstream.tar.gz",
+    "url": "https://codeload.github.com/community-archive/obsidian-kanban/tar.gz/8501981a1afacb4c8fc03ec60604aa5eedfbd857",
+    "sha256": "dcf4fcc99f12749a0e0f596f92873a4dd206a929b18bbf30e5dd13725dbbe0ff",
+    "size": 5652996,
+    "top_directory": "obsidian-kanban-8501981a1afacb4c8fc03ec60604aa5eedfbd857",
+    "retrieved_at": "2026-09-13",
+    "note": "Dos descargas independientes produjeron los mismos bytes; LICENSE.md, package.json, yarn.lock y es.ts internos coinciden con upstream_sha256."
+  },
+  "license": {
+    "file": "LICENSE.md",
+    "identifier": "GPL-3.0",
+    "note": "El package.json original declara \"MIT\", pero el archivo de licencia de esa revisión es GNU GPL versión 3. Se conserva y se cumple LICENSE.md."
+  },
+  "upstream_spanish": "Diccionario vacío tanto en 2.0.51 como en master al consultar.",
+  "upstream_sha256": {
+    "package.json": "a6f390a889442083ede235c53f72a967a31f5ba2a6d665520883b99dd6035519",
+    "yarn.lock": "f9b12c02939d88319cc48ac023843d6035dc36d9fc63432e1a361b272a353dd7",
+    "esbuild.config.mjs": "8880b2d9214441455e001e041ac959d36155e396beab37d3eab38c27a7156022",
+    "LICENSE.md": "8b1ba204bb69a0ade2bfcf65ef294a920f6bb361b317dba43c7ef29d96332b9b",
+    "src/lang/locale/en.ts": "eb29fe7a1288614354822cf6efed04bdad37c138b8bacb0c39a1b9f6898b1b08",
+    "src/parsers/common.ts": "25886509719608ba8b077a83e38b45afe96a46367442950be5380a640eab76c5",
+    "src/parsers/formats/list.ts": "7f610efe4b099a0e1c3a194aec79a594fb1a97edab98a0ac2d0ef262a9b2fa3a",
+    "src/lang/locale/es.ts": "621ee09c2d5014687c8d0e7414a3d4ac6897613372935a4b7e4498fb137c377f",
+    "src/lang/helpers.ts": "17a4f870febc7e32c82f4e3646a3d7ade2b7e8096aeb4ed8a187da21a538fd6c",
+    "src/components/Kanban.tsx": "b7673a417379c69208318389f36739f56fbea816a54ce9bb927512ee1b722a86",
+    "src/components/Item/ItemCheckbox.tsx": "04bc36539cc31a1965f62f4e7efd9e3af1b94403c8314c220395c375345e0791",
+    "src/Settings.ts": "f627495f3f01d1fb943b007febe5ade5a3f64d0d15d0f5bf143f3346cff669e0"
+  },
+  "build": {
+    "os": "macOS 26.5.1 25F80",
+    "node": "24.13.0",
+    "npm": "11.6.2",
+    "yarn": "1.22.22",
+    "commands": [
+      "tar -xzf upstream.tar.gz --strip-components 1",
+      "git apply es.patch",
+      "npx --yes yarn@1.22.22 install --frozen-lockfile --non-interactive",
+      "npm run typecheck",
+      "npm run build"
+    ],
+    "changed_upstream_files": [
+      "src/lang/locale/es.ts",
+      "src/components/Item/ItemCheckbox.tsx",
+      "src/Settings.ts",
+      "src/components/Kanban.tsx"
+    ]
+  },
+  "delivered_sha256": {
+    "es.ts": "ae95f61541f94b79736ea5f96e4f3e7a5f7b1cfa8ce063174cd57beef6172b91",
+    "es.patch": "560fbf631a3281af0aba76a67891f3f26b2136b2f2a4a3c5040d4162ad536b2e",
+    "LICENSE.md": "8b1ba204bb69a0ade2bfcf65ef294a920f6bb361b317dba43c7ef29d96332b9b",
+    "upstream.tar.gz": "dcf4fcc99f12749a0e0f596f92873a4dd206a929b18bbf30e5dd13725dbbe0ff",
+    "plugin/main.js": "30dd0c4166690443d8a8c78ec461b43545a266f441443f5f68466905b7076525",
+    "plugin/styles.css": "ecf6dd31f1727c441cce6f54794b0d3916dcfffc87fa17b855c79ba04a85d9a7",
+    "plugin/manifest.json": "24976787097ead467969e014a35654e7a80e4db49a977689a48afadfa15e1854"
+  },
+  "serializer": {
+    "complete": "**Completo**",
+    "archive_separator": "***",
+    "archive_heading": "## Archivo",
+    "archive_limit": -1
+  },
+  "ui_status": "Verificados creación, edición, movimiento por menú y arrastre, archivo, marcadores, ajustes, error explicado en español, reinicio y Markdown sin plugin en macOS 26.5.1/Obsidian 1.13.7 aislado. El enlace archivado queda oculto en vista Kanban; archivado automático deshabilitado. Véase development/evidence/ui/report.md."
+}

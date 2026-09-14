@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "cooperative_profiles": [
+    {
+      "id": "macos-26-5-1-arm64-obsidian-1-13-7-py-3-13-5",
+      "enabled": true,
+      "platform": "darwin",
+      "architecture": "arm64",
+      "versions": {
+        "python": "3.13.5",
+        "claude_code": "2.1.270",
+        "obsidian": "1.13.7",
+        "claudian": "2.2.6",
+        "kanban": "2.0.51",
+        "os_version": "26.5.1"
+      },
+      "installed_files": [
+        {
+          "path": ".claude/scripts/adapters.py",
+          "release_path": "libro/.claude/scripts/adapters.py",
+          "sha256": "9f4c8ed26701a19344656f607a092c9e29ae281d57bf0796b152d3160dc31634"
+        },
+        {
+          "path": ".claude/scripts/book.py",
+          "release_path": "libro/.claude/scripts/book.py",
+          "sha256": "bc73f50a89f49dac2292d51692838ec897a77186fd6a4464456e715bbe898012"
+        },
+        {
+          "path": ".claude/scripts/maintenance.py",
+          "release_path": "libro/.claude/scripts/maintenance.py",
+          "sha256": "a61d4220b81330bd3d1f99ef5519c55d9f6fc7889f12524e4b4c72d5c4aaa365"
+        },
+        {
+          "path": ".claude/scripts/permission_guard.py",
+          "release_path": "libro/.claude/scripts/permission_guard.py",
+          "sha256": "6bb297df9a98971e0b9f3c8b611ce7f71a035863710354412e7391f99d8ce637"
+        },
+        {
+          "path": ".claude/scripts/research.py",
+          "release_path": "libro/.claude/scripts/research.py",
+          "sha256": "38f538beca97bd8b68a16e5e4b31db79680dfb7e41811e44a624832748066898"
+        },
+        {
+          "path": ".claude/scripts/runtime.py",
+          "release_path": "libro/.claude/scripts/runtime.py",
+          "sha256": "e7cab3d819f1766bf34794f895d02d3a61fa7de9a0e1a20b5d7544d8d619bbf4"
+        },
+        {
+          "path": ".claude/scripts/schemas.py",
+          "release_path": "libro/.claude/scripts/schemas.py",
+          "sha256": "b74697a242e720fbc18a56e3f62de68ce33ce30aad756fe1cfd6e3eb71e70257"
+        },
+        {
+          "path": ".claude/scripts/setup.py",
+          "release_path": "libro/.claude/scripts/setup.py",
+          "sha256": "935dcf26997407890f8632e1c4421e95736f71b446cc856e5ded3c43713aa71a"
+        },
+        {
+          "path": ".obsidian/plugins/realclaudian/main.js",
+          "release_path": "vendor/claudian/plugin/main.js",
+          "sha256": "1f97c1fef808434b87c1c1d033033afb65bdd44eb7747db92a4eef03732bdcea"
+        },
+        {
+          "path": ".obsidian/plugins/realclaudian/manifest.json",
+          "release_path": "vendor/claudian/plugin/manifest.json",
+          "sha256": "03daf2c5d330768f4b5b28f8426a4a9c2061c1f05137455d40ff95077199059a"
+        },
+        {
+          "path": ".obsidian/plugins/realclaudian/styles.css",
+          "release_path": "vendor/claudian/plugin/styles.css",
+          "sha256": "e9e77a6d919ab4d30aa0dc21bcaaed3f92d66640a73437b5920c1958796fdf21"
+        },
+        {
+          "path": ".obsidian/plugins/obsidian-kanban/main.js",
+          "release_path": "vendor/kanban/plugin/main.js",
+          "sha256": "30dd0c4166690443d8a8c78ec461b43545a266f441443f5f68466905b7076525"
+        },
+        {
+          "path": ".obsidian/plugins/obsidian-kanban/manifest.json",
+          "release_path": "vendor/kanban/plugin/manifest.json",
+          "sha256": "24976787097ead467969e014a35654e7a80e4db49a977689a48afadfa15e1854"
+        },
+        {
+          "path": ".obsidian/plugins/obsidian-kanban/styles.css",
+          "release_path": "vendor/kanban/plugin/styles.css",
+          "sha256": "ecf6dd31f1727c441cce6f54794b0d3916dcfffc87fa17b855c79ba04a85d9a7"
+        }
+      ],
+      "evidence": {
+        "id": "macos-preservation-review-2026-09-14-export-contract",
+        "sha256": "9bc2b59dd650ffb68280bc3caea79f88fc2a95111106093abc414b551e03f515",
+        "checks": [
+          "saved-paused-apply",
+          "unsaved-buffer-candidate",
+          "drag",
+          "restore",
+          "restart"
+        ],
+        "approved": true,
+        "runtime_observations": {
+          "hooks": {
+            "id": "live-ui/46-transcript-sanitized-new-runtime.json@b0b8546e0444db4fecf1163b757d294bfbe7774d",
+            "sha256": "49e655abb0ccba937f1b382f73ff627d46860aad5d4c2d7c079a493d1a7984df",
+            "events": [
+              "PreToolUse",
+              "SessionStart",
+              "Stop"
+            ]
+          },
+          "permissions": {
+            "id": "live-ui/46-transcript-sanitized-new-runtime.json@b0b8546e0444db4fecf1163b757d294bfbe7774d",
+            "sha256": "49e655abb0ccba937f1b382f73ff627d46860aad5d4c2d7c079a493d1a7984df",
+            "request_permission_mode": "default",
+            "denied": [
+              "Bash"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

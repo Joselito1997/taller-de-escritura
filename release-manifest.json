@@ -1,0 +1,599 @@
+{
+  "schema_version": 1,
+  "release": {
+    "name": "taller-de-escritura",
+    "version": "0.1.1-candidato"
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "42eb05ff460e9eae0ca2d4dda6a8d76d2aeb65849a463a1bdef087ce1d6340a6",
+      "size": 673
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "91f8d63ecbf2d72d2836fc13ffe4b037b43e03c463315f7f9f80a60909e06c1a",
+      "size": 2945
+    },
+    {
+      "path": "LICENCIA.md",
+      "sha256": "db0eebc75d7bcc6568455494bc3cf0a0b6494517d293b004fa374a5f92c4d1ce",
+      "size": 1236
+    },
+    {
+      "path": "README.md",
+      "sha256": "4afd5b9a55191067224afc8eaa99eb18e7365ece0d49b4bb73ea5976dbb5d053",
+      "size": 8233
+    },
+    {
+      "path": "compatibility.json",
+      "sha256": "935998f83c373681094bc2d582ccc2066e7a61b016545294c40bbb4dc92f484d",
+      "size": 4743
+    },
+    {
+      "path": "instalar.py",
+      "sha256": "ce052bed6bd674fc778fd4f7951d2f97f17c938b03faae271a72ca6cfacf2391",
+      "size": 24687
+    },
+    {
+      "path": "instalar.sh",
+      "sha256": "024e3f5673a453e684d25605d7e99d6bd82254f12dc39ff396525cbdd6c50d16",
+      "size": 2356
+    },
+    {
+      "path": "installation/start.js",
+      "sha256": "70ecd74cb37a310b6c2a3e1c109c5d55c3c28970a72d302d14021331fa2f915f",
+      "size": 7232
+    },
+    {
+      "path": "libro/.claude/references/helper-operations.md",
+      "sha256": "7d57236e4de5568081d53f73402286f1771f6df5044175813522a3e12b695340",
+      "size": 7061
+    },
+    {
+      "path": "libro/.claude/references/records.md",
+      "sha256": "1d22887070251d93234c8a28bacf0e6a7d9243edb2077a74ea1f3fec76e87158",
+      "size": 17062
+    },
+    {
+      "path": "libro/.claude/references/workflow-contract.md",
+      "sha256": "4812cd118be3f94a840b284cf70e5751982848b7f27694377fb58e5572fcda17",
+      "size": 20310
+    },
+    {
+      "path": "libro/.claude/scripts/adapters.py",
+      "sha256": "9f4c8ed26701a19344656f607a092c9e29ae281d57bf0796b152d3160dc31634",
+      "size": 27269
+    },
+    {
+      "path": "libro/.claude/scripts/book.py",
+      "sha256": "bc73f50a89f49dac2292d51692838ec897a77186fd6a4464456e715bbe898012",
+      "size": 57811
+    },
+    {
+      "path": "libro/.claude/scripts/maintenance.py",
+      "sha256": "a61d4220b81330bd3d1f99ef5519c55d9f6fc7889f12524e4b4c72d5c4aaa365",
+      "size": 15988
+    },
+    {
+      "path": "libro/.claude/scripts/permission_guard.py",
+      "sha256": "6bb297df9a98971e0b9f3c8b611ce7f71a035863710354412e7391f99d8ce637",
+      "size": 2076
+    },
+    {
+      "path": "libro/.claude/scripts/research.py",
+      "sha256": "38f538beca97bd8b68a16e5e4b31db79680dfb7e41811e44a624832748066898",
+      "size": 17942
+    },
+    {
+      "path": "libro/.claude/scripts/runtime.py",
+      "sha256": "e7cab3d819f1766bf34794f895d02d3a61fa7de9a0e1a20b5d7544d8d619bbf4",
+      "size": 36868
+    },
+    {
+      "path": "libro/.claude/scripts/schemas.py",
+      "sha256": "b74697a242e720fbc18a56e3f62de68ce33ce30aad756fe1cfd6e3eb71e70257",
+      "size": 13173
+    },
+    {
+      "path": "libro/.claude/scripts/setup.py",
+      "sha256": "935dcf26997407890f8632e1c4421e95736f71b446cc856e5ded3c43713aa71a",
+      "size": 19957
+    },
+    {
+      "path": "libro/.claude/settings.template.json",
+      "sha256": "85caa2620d914b239a02e9ab11197dc1942f151cda6b99e7491f33198a904d15",
+      "size": 147
+    },
+    {
+      "path": "libro/.claude/skills/assess/SKILL.md",
+      "sha256": "68d4eba0b3d55c7eb5b290d14c3133334f1101510ed769fd11fbdbe979393027",
+      "size": 4156
+    },
+    {
+      "path": "libro/.claude/skills/draft/SKILL.md",
+      "sha256": "cc27b457a9a651c563f51f3497dcd501ab25a8c41ae61164499ef2cb6fede0c8",
+      "size": 5055
+    },
+    {
+      "path": "libro/.claude/skills/draft/references/atmosphere-and-description.md",
+      "sha256": "4485c695b2f9c00fba4f3bb269e16a86e203374b551235c158c95a09d33da920",
+      "size": 5453
+    },
+    {
+      "path": "libro/.claude/skills/draft/references/dialogue-and-subtext.md",
+      "sha256": "915b2d6a00e5256b3a88b5fff3813834949b57c8e71b080f3b7658654c85ec47",
+      "size": 6261
+    },
+    {
+      "path": "libro/.claude/skills/draft/references/narration-and-viewpoint.md",
+      "sha256": "dd60f1f571936257fff0ee15d56bb7e8a14aa56f77ac6e4818d25acb1c29b2ab",
+      "size": 6272
+    },
+    {
+      "path": "libro/.claude/skills/draft/references/pace-and-transitions.md",
+      "sha256": "4ef228137a00d8f95c40f4417fca447ab4b985c7dd7c3063a74d33eceb5e7754",
+      "size": 5714
+    },
+    {
+      "path": "libro/.claude/skills/draft/references/voice-and-style.md",
+      "sha256": "44d99d9383f103551a21bf51ad2f332baf9f0de6994ada87c4b76feb1c2d2d29",
+      "size": 6302
+    },
+    {
+      "path": "libro/.claude/skills/handoff/SKILL.md",
+      "sha256": "1b63bfbabe3013a3e849110868428c988dd1cc1d64cfc1226721487c8593a3e1",
+      "size": 4668
+    },
+    {
+      "path": "libro/.claude/skills/handoff/references/export.md",
+      "sha256": "43f3d1eff1ce184ef1d5a6a47ceac0587b762d9f13236a037c5bddcd0ee9ad57",
+      "size": 3553
+    },
+    {
+      "path": "libro/.claude/skills/import/SKILL.md",
+      "sha256": "6337cee957132642788e8679f5e700adf1a0b8ac147f03c5e551c54ef30e4ef4",
+      "size": 5637
+    },
+    {
+      "path": "libro/.claude/skills/plan/SKILL.md",
+      "sha256": "a3a24456ea6705d07a36d2ed945945d7b9edbe10a4e509e4933f2b5bdc6fb40e",
+      "size": 4960
+    },
+    {
+      "path": "libro/.claude/skills/plan/references/chapter-and-scene-planning.md",
+      "sha256": "bbe1cbfff6c48bcd661de4e3caa87c526348f02fbddf9159c142ab4aa565d378",
+      "size": 15922
+    },
+    {
+      "path": "libro/.claude/skills/plan/references/character-arcs.md",
+      "sha256": "1bfd8f31107df4b3343158ecaea9d8e156d601f8d1021e079c48e0097091d922",
+      "size": 7692
+    },
+    {
+      "path": "libro/.claude/skills/plan/references/plot-alternatives.md",
+      "sha256": "834f760cc3ac5bac5d15e1580477836ab711434404e4b757c90c3bf849115977",
+      "size": 7122
+    },
+    {
+      "path": "libro/.claude/skills/plan/references/revision-planning.md",
+      "sha256": "28833a3f6ab8028780acfefb671f3144c45b18b81916356a5f2596943ff77096",
+      "size": 7339
+    },
+    {
+      "path": "libro/.claude/skills/plan/references/worldbuilding.md",
+      "sha256": "6c6eab758a181de6576317672c7a92f27bbb8c472dcc3877313c1bde18a021e0",
+      "size": 8268
+    },
+    {
+      "path": "libro/.claude/skills/research/SKILL.md",
+      "sha256": "14a50b431eea1bde12bb59d733065e3e31018a5bfb3c6a4384c0acdea56c69e0",
+      "size": 6093
+    },
+    {
+      "path": "libro/.claude/skills/review/SKILL.md",
+      "sha256": "99565907497c7d290ebc97aed5ce3a4a0d14dadf24823244bdbd17852364b706",
+      "size": 4343
+    },
+    {
+      "path": "libro/.claude/skills/revise/SKILL.md",
+      "sha256": "9b0306547b5cada755a14cba9f03aec01424e7f6e9d8bb14f5295f504468eca8",
+      "size": 5060
+    },
+    {
+      "path": "libro/.claude/templates/alternative.md",
+      "sha256": "337a458eff25d11ca2b8de61a736751d7036ab96c5ec413518bf0f721627d30a",
+      "size": 725
+    },
+    {
+      "path": "libro/.claude/templates/chapter.md",
+      "sha256": "9b9e9e79ad301aa413fdf98909ba7c217abddd93b57ac39974ef0dfe2b8604c3",
+      "size": 579
+    },
+    {
+      "path": "libro/.claude/templates/character.md",
+      "sha256": "2ca7fad84d866b02bc0028db9c29326717f4678be764c799cf0b6d08342d1a60",
+      "size": 1515
+    },
+    {
+      "path": "libro/.claude/templates/creative-direction.md",
+      "sha256": "0fef3f03284a5d82a26c5a89d4817f86c54b25bc557c5c86ed9e283faeccaf54",
+      "size": 939
+    },
+    {
+      "path": "libro/.claude/templates/faction.md",
+      "sha256": "d827874953a9cba929cdd6526511899934e0d6e2b76da20c4c6065cfa9181701",
+      "size": 1073
+    },
+    {
+      "path": "libro/.claude/templates/finding.md",
+      "sha256": "ece6a78b1c7b9f1df505cd864ab262873d98cbf428773ee9a24291094c626599",
+      "size": 1012
+    },
+    {
+      "path": "libro/.claude/templates/import-inventory.md",
+      "sha256": "bd2ba66fb007ec9f9bfe8f1eff6a2f9f1495d567f2345c66d849324bda37143e",
+      "size": 1383
+    },
+    {
+      "path": "libro/.claude/templates/location.md",
+      "sha256": "ed55a5f04e62be751108ecee9bcd32aac7caa82f722ed92eda187358b1172d41",
+      "size": 1155
+    },
+    {
+      "path": "libro/.claude/templates/plan.md",
+      "sha256": "ac47323dd8403544fa2c10864a28cc28cba9418f2573e232c8f706ef4d56a7b6",
+      "size": 1133
+    },
+    {
+      "path": "libro/.claude/templates/relationship.md",
+      "sha256": "3fec49d3a8f615858ebad527625e6851a170f78868d68cfd789fce4a37ff1ddd",
+      "size": 1063
+    },
+    {
+      "path": "libro/.claude/templates/research-brief.md",
+      "sha256": "c11426ebce721b11a1a390100f984fef118dde3868a3fa525e1753ef133d845b",
+      "size": 1121
+    },
+    {
+      "path": "libro/.claude/templates/revision-backlog.md",
+      "sha256": "b54a707814a19dbea2d733f39ff9d801e6b4eff583a3ef15c1f8b353a21c72be",
+      "size": 218
+    },
+    {
+      "path": "libro/.claude/templates/session-log.md",
+      "sha256": "cdc684e93f29b3faa61dec8f4968eaf0d62cb1298670987055a46d9cf2a359fe",
+      "size": 1287
+    },
+    {
+      "path": "libro/.claude/templates/source.md",
+      "sha256": "f47064baf0db913f518615797e5dcce4303aeea196db48c6f710e95c7c6163f5",
+      "size": 1328
+    },
+    {
+      "path": "libro/.claude/templates/status.md",
+      "sha256": "51b4d517843e288fe7212ee54862132c84b50c92b7e61688de1a36d98d1c6652",
+      "size": 663
+    },
+    {
+      "path": "libro/.claude/templates/timeline-event.md",
+      "sha256": "8542d67c0c61622cc857db631b40907f76eac347d882ffb0416c967f2a7744f5",
+      "size": 1254
+    },
+    {
+      "path": "libro/.claude/templates/topic.md",
+      "sha256": "6d081c7065dd2c4a1d32fc6305fc9e7534e1bfe9c69829dbb2f45ff74dac6c47",
+      "size": 564
+    },
+    {
+      "path": "libro/.claude/templates/world-rule.md",
+      "sha256": "9ccf9ecbbdfdad733cf7dd88ba25f03df285cb8d8256cd7eadaf8455e08a4bb0",
+      "size": 1189
+    },
+    {
+      "path": "libro/.mcp.json",
+      "sha256": "0ba69ed1d6390f2fd6b63f181a3249abc938bc4ed06f42d0f61615a825da392d",
+      "size": 252
+    },
+    {
+      "path": "libro/CLAUDE.md",
+      "sha256": "1551010da35e00ecd072219cfb4270159a88dcfc754ed71ea55e1c6cd30ee663",
+      "size": 5276
+    },
+    {
+      "path": "libro/direccion-creativa.md",
+      "sha256": "8da22bd1c30533ae5307b9a093b8dac7dd31b242deed9187295530ca3c387598",
+      "size": 998
+    },
+    {
+      "path": "libro/estado.md",
+      "sha256": "93d3d6c3bedac0a99cc622e5a550aadbbdd967909e4c68b2be81c7ca66b7099b",
+      "size": 1072
+    },
+    {
+      "path": "libro/importaciones/inventario.md",
+      "sha256": "560f6e15dbbddd2a854de454344fcd012f06e8d8366cdd3779f18a75ab27ffc3",
+      "size": 1143
+    },
+    {
+      "path": "libro/inicio.md",
+      "sha256": "e4e12e1a42eccede56f5bf24aa142229dc82a701ddbb09a6d67f3206d8cd58d6",
+      "size": 3006
+    },
+    {
+      "path": "libro/investigacion/fuentes/11-13-elemental-idea-qa.md",
+      "sha256": "b82c6de9b1bf772943a16e2cdf2944f20154c33e21aee39f89ba62e9c1c9de70",
+      "size": 2061
+    },
+    {
+      "path": "libro/investigacion/fuentes/12-10-developing-your-own-personal-style.md",
+      "sha256": "e674880b282374db5b1ace67a6c811836a79c53bf2bb17d61f8b8cc54b15fb4c",
+      "size": 2115
+    },
+    {
+      "path": "libro/investigacion/fuentes/12-17-qa-on-style-diction-and-paragraphing.md",
+      "sha256": "a48f7b973c44f0356ab1fb409987749270f9871f13f263a858732ab0d971eb9e",
+      "size": 2169
+    },
+    {
+      "path": "libro/investigacion/fuentes/12-9-qa-on-viewpoint.md",
+      "sha256": "a2208149f4656d5634940858f967323d90a72077e59235e4d83598430f589d48",
+      "size": 2095
+    },
+    {
+      "path": "libro/investigacion/fuentes/13-22-character-arcs.md",
+      "sha256": "b8969fc46f87457191f07f72940f022d350b69c3504fff1c9f7cef5d03eb34f4",
+      "size": 2058
+    },
+    {
+      "path": "libro/investigacion/fuentes/13-45-next-level-narration.md",
+      "sha256": "f754765df4ac74be58724fb9531db627497127d04a1e98f15808e06c99ae33e0",
+      "size": 2108
+    },
+    {
+      "path": "libro/investigacion/fuentes/14-35-what-you-leave-out.md",
+      "sha256": "93b3eca2dcb1633d7915fc724f84f9ab05b1b203b693040b99fa191f4ec8945b",
+      "size": 2050
+    },
+    {
+      "path": "libro/investigacion/fuentes/16-41-middles-and-conflicts.md",
+      "sha256": "d11b502c1ecb6585cccab679f907833fbcc1ca0f34cc208a3910aef8028ea250",
+      "size": 2118
+    },
+    {
+      "path": "libro/investigacion/fuentes/16-43-the-narrative-holy-trinity-of-world-character-and-plot-with-fonda-lee.md",
+      "sha256": "2dd9e561593d15bbd01aa423fa7c16933cc22922cf87477ac364dba2be8ea78e",
+      "size": 2268
+    },
+    {
+      "path": "libro/investigacion/fuentes/17-29-the-job-of-dialogue.md",
+      "sha256": "f9574072007bd0bf01a78ff600c569db7b934658f7943cd81d58a85238ea7912",
+      "size": 2072
+    },
+    {
+      "path": "libro/investigacion/fuentes/17-30-know-your-characters.md",
+      "sha256": "777fe051bb379bb87b011eedcd7db41bfd45cbba08f2a52e5a322d4f5f56eb05",
+      "size": 2104
+    },
+    {
+      "path": "libro/investigacion/fuentes/17-31-everyone-has-an-agenda.md",
+      "sha256": "58654f28ea56e33f65fdb420e674e64fafd9eeb21494e825d9d2436c15e04fe3",
+      "size": 2065
+    },
+    {
+      "path": "libro/investigacion/fuentes/17-34-developing-subtext.md",
+      "sha256": "a208a2bb85e92a2b4260bf1bce7e5987ce6b3c72b1dc1ba91d0348b005fdb06b",
+      "size": 2047
+    },
+    {
+      "path": "libro/investigacion/fuentes/1905-live-recording-revisions-with-mahtab-narsimhan.md",
+      "sha256": "b54c5506d0cefe888bc78c44693bf7502b09569c85bb1c93460adba549fea10e",
+      "size": 2191
+    },
+    {
+      "path": "libro/investigacion/fuentes/20-07-lens-3-identity-2-motivation-goals.md",
+      "sha256": "040915bedf604b4081cdc04d8cf537a24fdd762aae8f0c2839f5484b01c4049b",
+      "size": 2109
+    },
+    {
+      "path": "libro/investigacion/fuentes/ai-2027.md",
+      "sha256": "194e2e621aa1c9480ef52aebfa14a60b866419f4fb48ed6d2a5f2b9f3c75b015",
+      "size": 3260
+    },
+    {
+      "path": "libro/investigacion/fuentes/ai-2040.md",
+      "sha256": "0a69d65597aecf24f8ae0f0cad27168ea02b84128a16a1503b56175a3f7b7e5f",
+      "size": 3541
+    },
+    {
+      "path": "libro/investigacion/fuentes/brandon-sandersons-2025-guide-to-plot-lecture-2.md",
+      "sha256": "817f3f2f0f961c35942949410ea5017865bdb7649fdb34a0321f79032eecb06c",
+      "size": 2265
+    },
+    {
+      "path": "libro/investigacion/fuentes/customizing-your-character-brandon-sandersons-writing-lecture-6-2025.md",
+      "sha256": "49506242684b2d1b4265d0e899f2d0890599c90a3af6e161aaf5981028ba8170",
+      "size": 2275
+    },
+    {
+      "path": "libro/investigacion/fuentes/machines-of-loving-grace.md",
+      "sha256": "e95ebd15f39c44da479b5519300efdbd89836c96321e9344fb658fa1d7f22ef6",
+      "size": 2849
+    },
+    {
+      "path": "libro/investigacion/fuentes/pace-fiction-scene-sequel.md",
+      "sha256": "1081368e9d138307385fbee60a242fa64d5d1a782b63ce5de1cc8a27db86675e",
+      "size": 2200
+    },
+    {
+      "path": "libro/investigacion/fuentes/sandersons-second-law.md",
+      "sha256": "8d9cd72d63dd2f987da30765499f93383b4e52685300aca3b7ef9fe4143e5dc8",
+      "size": 2137
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-10-19-intrigue.md",
+      "sha256": "0d2ef705c42a4ae19a205d6f232373b0d8e7023222dbe313ec2f1124d0daac5d",
+      "size": 2069
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-10-2-i-have-an-idea-what-do-i-do-now.md",
+      "sha256": "e440907d01e535bec4de5356bc9812503bd054a1c917658de4f80036003bffb8",
+      "size": 2137
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-10-23-can-you-tell-me-how-to-show.md",
+      "sha256": "482a51865ee61148da8657f0c123ae357a24b83b308f15722a5c5b3deda64f2a",
+      "size": 2144
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-10-25-what-makes-a-scene.md",
+      "sha256": "5e84eb1db518b04d6158d22bc1c310acfd933af32d6350eec8c0e32f3a1c6100",
+      "size": 2070
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-10-32-how-do-i-control-the-speed-of-the-story.md",
+      "sha256": "a82f780f99aa71350d01f894b2ce8e955066782802a0a358633320184cf96436",
+      "size": 2202
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-10-44-how-do-i-fix-what-is-broken.md",
+      "sha256": "a6ed8364ac0a2b52c8eb2575187ee9b559624a945c79ba45a4659fcb09ca75fd",
+      "size": 2146
+    },
+    {
+      "path": "libro/investigacion/fuentes/writing-excuses-7-5-sensory-writing.md",
+      "sha256": "3bed736708c03555db6c5f2ea9d544f9b72208b907d7dcf8383ebeb8c9efaa38",
+      "size": 2087
+    },
+    {
+      "path": "libro/investigacion/indice.md",
+      "sha256": "1ce6e6f1c7ef74373eff9319ad730d617a33ccb3dd6c616dbab1fbaa2a9ad442",
+      "size": 7970
+    },
+    {
+      "path": "libro/manuscrito/indice.md",
+      "sha256": "0e4e9a99f9333324456a7001901e0fff9c484d7dcfd039fd2142a534bc73710d",
+      "size": 499
+    },
+    {
+      "path": "libro/trabajo-pendiente.md",
+      "sha256": "b54a707814a19dbea2d733f39ff9d801e6b4eff583a3ef15c1f8b353a21c72be",
+      "size": 218
+    },
+    {
+      "path": "release-allowlist.json",
+      "sha256": "5350d939975454a3f3576d0481c552ad3d232891e58050edf4bc37b634c21407",
+      "size": 1851
+    },
+    {
+      "path": "requirements.lock",
+      "sha256": "2249fe8d8db00498120b560419da5f29eae5dbba52027fe6bd2cf64782b43756",
+      "size": 27
+    },
+    {
+      "path": "starter-manifest.json",
+      "sha256": "a4db98778ee3099b00b98548e96ba71f332a336fefbc91715e946f8581ecb257",
+      "size": 17586
+    },
+    {
+      "path": "vendor/claudian/LICENSE",
+      "sha256": "3bed3331b7048bac17cf50e249d560ccc9508c970da8d7b9283bf4f2e633a91d",
+      "size": 1055
+    },
+    {
+      "path": "vendor/claudian/README.md",
+      "sha256": "7265aa058b521004f8b8ae72e815caf2fe42032f05542ef18954e991c7638e7e",
+      "size": 5533
+    },
+    {
+      "path": "vendor/claudian/SHA256SUMS",
+      "sha256": "3989abcc84474c6eb304e568164a6acbc1ce2dc23631dc2bceb9512e56c8b447",
+      "size": 580
+    },
+    {
+      "path": "vendor/claudian/THIRD_PARTY_NOTICES.md",
+      "sha256": "efcf56f4ce71246743421f7e65feb574c18dc490b1dc3331bbe092e574184a99",
+      "size": 266534
+    },
+    {
+      "path": "vendor/claudian/plugin/main.js",
+      "sha256": "1f97c1fef808434b87c1c1d033033afb65bdd44eb7747db92a4eef03732bdcea",
+      "size": 4988793
+    },
+    {
+      "path": "vendor/claudian/plugin/manifest.json",
+      "sha256": "03daf2c5d330768f4b5b28f8426a4a9c2061c1f05137455d40ff95077199059a",
+      "size": 447
+    },
+    {
+      "path": "vendor/claudian/plugin/styles.css",
+      "sha256": "e9e77a6d919ab4d30aa0dc21bcaaed3f92d66640a73437b5920c1958796fdf21",
+      "size": 200924
+    },
+    {
+      "path": "vendor/claudian/provenance.json",
+      "sha256": "bdf3391fb2e21e217476856c690a7cc60af9eccbf1e0bec9587cb962845d3642",
+      "size": 2109
+    },
+    {
+      "path": "vendor/claudian/rebuild.py",
+      "sha256": "13cd991e52c363afee41b90ccca4bbdf90a9f9e1c8efc10474e2fceec697aa18",
+      "size": 3240
+    },
+    {
+      "path": "vendor/claudian/spanish-ui.patch",
+      "sha256": "e28d367e32e211369ed928863dcc2f20675f9d6248d85b2ea5e2ab0a9e09f62d",
+      "size": 295032
+    },
+    {
+      "path": "vendor/kanban/LICENSE.md",
+      "sha256": "8b1ba204bb69a0ade2bfcf65ef294a920f6bb361b317dba43c7ef29d96332b9b",
+      "size": 35148
+    },
+    {
+      "path": "vendor/kanban/README.md",
+      "sha256": "0a07fc09a7d352ad02308eee64aca1ae290f4fb1b2cc0075af6cef7629803355",
+      "size": 4740
+    },
+    {
+      "path": "vendor/kanban/es.patch",
+      "sha256": "560fbf631a3281af0aba76a67891f3f26b2136b2f2a4a3c5040d4162ad536b2e",
+      "size": 17069
+    },
+    {
+      "path": "vendor/kanban/es.ts",
+      "sha256": "ae95f61541f94b79736ea5f96e4f3e7a5f7b1cfa8ce063174cd57beef6172b91",
+      "size": 13571
+    },
+    {
+      "path": "vendor/kanban/plugin/main.js",
+      "sha256": "30dd0c4166690443d8a8c78ec461b43545a266f441443f5f68466905b7076525",
+      "size": 1003675
+    },
+    {
+      "path": "vendor/kanban/plugin/manifest.json",
+      "sha256": "24976787097ead467969e014a35654e7a80e4db49a977689a48afadfa15e1854",
+      "size": 348
+    },
+    {
+      "path": "vendor/kanban/plugin/styles.css",
+      "sha256": "ecf6dd31f1727c441cce6f54794b0d3916dcfffc87fa17b855c79ba04a85d9a7",
+      "size": 60802
+    },
+    {
+      "path": "vendor/kanban/provenance.json",
+      "sha256": "563b82918ad3ff4b2fe13274548d707de2f4e7f4be68ce48b141c0e1cd8f47f0",
+      "size": 3952
+    },
+    {
+      "path": "vendor/kanban/rebuild.sh",
+      "sha256": "8e642a25fdee4448c9db5aad2857caafe84c78d8c32ebf8483fd86e51802d171",
+      "size": 978
+    },
+    {
+      "path": "vendor/kanban/upstream.tar.gz",
+      "sha256": "dcf4fcc99f12749a0e0f596f92873a4dd206a929b18bbf30e5dd13725dbbe0ff",
+      "size": 5652996
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "release": {
+    "name": "taller-de-escritura",
+    "version": "0.1.1-candidato"
+  },
+  "archive_root": "taller-de-escritura",
+  "files": [
+    ".gitignore",
+    "CLAUDE.md",
+    "LICENCIA.md",
+    "README.md",
+    "compatibility.json",
+    "instalar.py",
+    "instalar.sh",
+    "installation/start.js",
+    "libro/.claude/settings.template.json",
+    "libro/.mcp.json",
+    "libro/CLAUDE.md",
+    "libro/direccion-creativa.md",
+    "libro/estado.md",
+    "libro/importaciones/inventario.md",
+    "libro/inicio.md",
+    "libro/investigacion/indice.md",
+    "libro/manuscrito/indice.md",
+    "libro/trabajo-pendiente.md",
+    "release-allowlist.json",
+    "requirements.lock",
+    "starter-manifest.json",
+    "vendor/claudian/LICENSE",
+    "vendor/claudian/README.md",
+    "vendor/claudian/SHA256SUMS",
+    "vendor/claudian/THIRD_PARTY_NOTICES.md",
+    "vendor/claudian/plugin/main.js",
+    "vendor/claudian/plugin/manifest.json",
+    "vendor/claudian/plugin/styles.css",
+    "vendor/claudian/provenance.json",
+    "vendor/claudian/rebuild.py",
+    "vendor/claudian/spanish-ui.patch",
+    "vendor/kanban/LICENSE.md",
+    "vendor/kanban/README.md",
+    "vendor/kanban/es.patch",
+    "vendor/kanban/es.ts",
+    "vendor/kanban/plugin/main.js",
+    "vendor/kanban/plugin/manifest.json",
+    "vendor/kanban/plugin/styles.css",
+    "vendor/kanban/provenance.json",
+    "vendor/kanban/rebuild.sh",
+    "vendor/kanban/upstream.tar.gz"
+  ],
+  "prefixes": [
+    {
+      "prefix": "libro/.claude/references/",
+      "suffix": ".md"
+    },
+    {
+      "prefix": "libro/.claude/scripts/",
+      "suffix": ".py"
+    },
+    {
+      "prefix": "libro/.claude/skills/",
+      "suffix": ".md"
+    },
+    {
+      "prefix": "libro/.claude/templates/",
+      "suffix": ".md"
+    }
+  ],
+  "excluded": [
+    "vendor/claudian/upstream.tar.gz"
+  ]
+}
