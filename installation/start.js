@@ -53,7 +53,7 @@ module.exports = async function start(app, obsidianVersion) {
     const structure = await run('book.py', ['--vault', vault, 'check'], {action: 'layout'});
     if (!structure.complete) throw new Error('Faltan carpetas del taller: ' + structure.missing.join(', '));
     const visibleFolders = structure.directories.map(item => item.path);
-    const foldersVisible = () => visibleFolders.every(name => app.vault.getAbstractFileByPath(name) instanceof require('obsidian').TFolder);
+    const foldersVisible = () => visibleFolders.every(name => Array.isArray(app.vault.getAbstractFileByPath(name)?.children));
     const folderDeadline = Date.now() + 10000;
     while (!foldersVisible() && Date.now() < folderDeadline) await new Promise(resolve => setTimeout(resolve, 100));
     if (!foldersVisible()) throw new Error('Obsidian todavía no muestra todas las carpetas previstas.');

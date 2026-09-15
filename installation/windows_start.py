@@ -58,7 +58,8 @@ def open_and_start_windows(target, executable, profile, timeout):
             evaluate('(async()=>{await app.plugins.loadManifests();return true})()')
         for plugin in ('realclaudian', 'obsidian-kanban'):
             command('plugin:enable', 'id=' + plugin)
-    expression = '(async()=>{if(app.vault.adapter.basePath!==' + json.dumps(str(vault)) + ')throw Error("Bóveda incorrecta");return JSON.stringify(await require(' + json.dumps(str(target / 'installation/start.js')) + ')(app,require("obsidian").apiVersion))})()'
+    obsidian_version = command('version')
+    expression = '(async()=>{if(app.vault.adapter.basePath!==' + json.dumps(str(vault)) + ')throw Error("Bóveda incorrecta");return JSON.stringify(await require(' + json.dumps(str(target / 'installation/start.js')) + ')(app,' + json.dumps(obsidian_version) + '))})()'
     output = command('eval', 'code=' + expression, limit=timeout)
     require(output.startswith('=> '), 'No se recibió el resultado de la preparación dentro de Obsidian.')
     result = read_json(target / RESULT)

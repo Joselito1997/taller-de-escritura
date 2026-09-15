@@ -2,7 +2,7 @@
   "schema_version": 1,
   "release": {
     "name": "taller-de-escritura",
-    "version": "0.1.3-candidato"
+    "version": "0.1.4-candidato"
   },
   "archive_root": "taller-de-escritura",
   "files": [
