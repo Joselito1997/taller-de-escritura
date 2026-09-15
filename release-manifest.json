@@ -2,9 +2,14 @@
   "schema_version": 1,
   "release": {
     "name": "taller-de-escritura",
-    "version": "0.1.1-candidato"
+    "version": "0.1.3-candidato"
   },
   "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "f81a7596d7ced239e32bcdde80c77af46683a8bd169a723c34230d2b4df33f0e",
+      "size": 81
+    },
     {
       "path": ".gitignore",
       "sha256": "42eb05ff460e9eae0ca2d4dda6a8d76d2aeb65849a463a1bdef087ce1d6340a6",
@@ -12,8 +17,8 @@
     },
     {
       "path": "CLAUDE.md",
-      "sha256": "91f8d63ecbf2d72d2836fc13ffe4b037b43e03c463315f7f9f80a60909e06c1a",
-      "size": 2945
+      "sha256": "7c523a3634ef2005899f2ef8687d8f757f6a2578c0afb9b57f4795f740b1b601",
+      "size": 3817
     },
     {
       "path": "LICENCIA.md",
@@ -22,18 +27,23 @@
     },
     {
       "path": "README.md",
-      "sha256": "4afd5b9a55191067224afc8eaa99eb18e7365ece0d49b4bb73ea5976dbb5d053",
-      "size": 8233
+      "sha256": "a62b3c54feba6381191aacbbbbd62ce4959d0a7a6ad885e57496269cd4974bae",
+      "size": 9208
     },
     {
       "path": "compatibility.json",
-      "sha256": "935998f83c373681094bc2d582ccc2066e7a61b016545294c40bbb4dc92f484d",
-      "size": 4743
+      "sha256": "4d796078b4be0c8e4eb85d68e8e5919bbfada11bdfb592ce5f24fa2f2361db04",
+      "size": 9841
+    },
+    {
+      "path": "instalar.ps1",
+      "sha256": "5810d318125afca0c49dd88fb92efd69ef064ca3f984819a36f85a71ee2b6175",
+      "size": 2441
     },
     {
       "path": "instalar.py",
-      "sha256": "ce052bed6bd674fc778fd4f7951d2f97f17c938b03faae271a72ca6cfacf2391",
-      "size": 24687
+      "sha256": "f3af261dd283763dcf32943047a13fce9c68d19c633e2dba0d5e4b4073f7e0ca",
+      "size": 26241
     },
     {
       "path": "instalar.sh",
@@ -42,8 +52,13 @@
     },
     {
       "path": "installation/start.js",
-      "sha256": "70ecd74cb37a310b6c2a3e1c109c5d55c3c28970a72d302d14021331fa2f915f",
-      "size": 7232
+      "sha256": "a08359a4e1aa1a69b4be33cac0b5835bf780fa0af0fa48396dc6eba77fff9312",
+      "size": 7976
+    },
+    {
+      "path": "installation/windows_start.py",
+      "sha256": "547f4920965be9927380fda26e9eb4042a63015f81f033a1d2a76659ff2023bc",
+      "size": 4549
     },
     {
       "path": "libro/.claude/references/helper-operations.md",
@@ -52,13 +67,13 @@
     },
     {
       "path": "libro/.claude/references/records.md",
-      "sha256": "1d22887070251d93234c8a28bacf0e6a7d9243edb2077a74ea1f3fec76e87158",
-      "size": 17062
+      "sha256": "be7befe5c4771fcca3a22c3b7f102f472f89d30cb89e9d7773586fd377998ca5",
+      "size": 20217
     },
     {
       "path": "libro/.claude/references/workflow-contract.md",
-      "sha256": "4812cd118be3f94a840b284cf70e5751982848b7f27694377fb58e5572fcda17",
-      "size": 20310
+      "sha256": "b9893d311943c51d0062e49b66cd108e350a162583f385132fc7b213d5ec6648",
+      "size": 21745
     },
     {
       "path": "libro/.claude/scripts/adapters.py",
@@ -67,18 +82,18 @@
     },
     {
       "path": "libro/.claude/scripts/book.py",
-      "sha256": "bc73f50a89f49dac2292d51692838ec897a77186fd6a4464456e715bbe898012",
-      "size": 57811
+      "sha256": "12fd4094c14176c7d3e50a4997f0e3aa93f37f4b43961d956821195f4f49929a",
+      "size": 60942
     },
     {
       "path": "libro/.claude/scripts/maintenance.py",
-      "sha256": "a61d4220b81330bd3d1f99ef5519c55d9f6fc7889f12524e4b4c72d5c4aaa365",
-      "size": 15988
+      "sha256": "8fc373a67f55a27f30bdefdb08f964e9644f305b8f0345733fdf5e914a0cd376",
+      "size": 16149
     },
     {
       "path": "libro/.claude/scripts/permission_guard.py",
-      "sha256": "6bb297df9a98971e0b9f3c8b611ce7f71a035863710354412e7391f99d8ce637",
-      "size": 2076
+      "sha256": "63bc4cedae44d10a42d8d893fe92bbe7e2f4f43849ab39eac381c16e0adc3ee3",
+      "size": 3365
     },
     {
       "path": "libro/.claude/scripts/research.py",
@@ -87,18 +102,23 @@
     },
     {
       "path": "libro/.claude/scripts/runtime.py",
-      "sha256": "e7cab3d819f1766bf34794f895d02d3a61fa7de9a0e1a20b5d7544d8d619bbf4",
-      "size": 36868
+      "sha256": "55e4fd58b53b129c4ce5b353a30f880962f9294ce072c09c8d86b50276ca9be3",
+      "size": 42214
     },
     {
       "path": "libro/.claude/scripts/schemas.py",
-      "sha256": "b74697a242e720fbc18a56e3f62de68ce33ce30aad756fe1cfd6e3eb71e70257",
-      "size": 13173
+      "sha256": "ea8040a9cb0b9062b84c68d4511dba7dfa3881ebd7d9debc2e939857b1364351",
+      "size": 14412
     },
     {
       "path": "libro/.claude/scripts/setup.py",
-      "sha256": "935dcf26997407890f8632e1c4421e95736f71b446cc856e5ded3c43713aa71a",
-      "size": 19957
+      "sha256": "350d0a86cee737222df2e5168e282374d3614d38182be7a773a9b7e4421a652a",
+      "size": 21243
+    },
+    {
+      "path": "libro/.claude/scripts/windows_files.py",
+      "sha256": "d8d377dd7792af85670594da8398d137309c8ac81de9e15898cebac720b204c9",
+      "size": 6884
     },
     {
       "path": "libro/.claude/settings.template.json",
@@ -152,8 +172,8 @@
     },
     {
       "path": "libro/.claude/skills/import/SKILL.md",
-      "sha256": "6337cee957132642788e8679f5e700adf1a0b8ac147f03c5e551c54ef30e4ef4",
-      "size": 5637
+      "sha256": "0cd00bb4b8ec14f89af9a0189c63f1465552304cbeb927805c2b57533f0d9d63",
+      "size": 7200
     },
     {
       "path": "libro/.claude/skills/plan/SKILL.md",
@@ -232,8 +252,8 @@
     },
     {
       "path": "libro/.claude/templates/import-inventory.md",
-      "sha256": "bd2ba66fb007ec9f9bfe8f1eff6a2f9f1495d567f2345c66d849324bda37143e",
-      "size": 1383
+      "sha256": "f57cf72385fc3ccfde8e9598a9e3fa2ca1915a0fadfe0e8b8808372b5cbd2a7b",
+      "size": 1404
     },
     {
       "path": "libro/.claude/templates/location.md",
@@ -297,8 +317,8 @@
     },
     {
       "path": "libro/CLAUDE.md",
-      "sha256": "1551010da35e00ecd072219cfb4270159a88dcfc754ed71ea55e1c6cd30ee663",
-      "size": 5276
+      "sha256": "1ae42eb353aec8f5adfdff6622323e3e6704de1bdcc41e91c7daa686aa3455a1",
+      "size": 5536
     },
     {
       "path": "libro/direccion-creativa.md",
@@ -311,14 +331,219 @@
       "size": 1072
     },
     {
+      "path": "libro/guia-del-taller/indice.md",
+      "sha256": "10a11f023cf42638e8e20522b840e8a2c23d4826fae73df4d69329367c97c1af",
+      "size": 2542
+    },
+    {
+      "path": "libro/guia-del-taller/references/helper-operations.md",
+      "sha256": "2929e448a7215798b616e8b84c64380faabb4fa95b825d814e24222eab0c07d9",
+      "size": 7127
+    },
+    {
+      "path": "libro/guia-del-taller/references/records.md",
+      "sha256": "8774a2c2b788faf9b928f2a513cbfb7bf2e94e1783ca34da53a6762929f252e3",
+      "size": 20273
+    },
+    {
+      "path": "libro/guia-del-taller/references/workflow-contract.md",
+      "sha256": "3d64091d8ea699296dcdfb6b66d9082bad7d9c9a839f5b727681a18b0ae484df",
+      "size": 21811
+    },
+    {
+      "path": "libro/guia-del-taller/skills/assess/SKILL.md",
+      "sha256": "3538ffdc89b5b6847bb8371acadb7037b8381e94ec3834a7c9408036a99cf866",
+      "size": 3963
+    },
+    {
+      "path": "libro/guia-del-taller/skills/draft/SKILL.md",
+      "sha256": "284976db04e52d609c04f7cd7625d38520c2aa920861f195488c594d7c5fe6fd",
+      "size": 4865
+    },
+    {
+      "path": "libro/guia-del-taller/skills/draft/references/atmosphere-and-description.md",
+      "sha256": "7f9b4f9baacf3669142455d54cc7d2ae76ec2413393d341de07b3b22a52d1ea1",
+      "size": 5541
+    },
+    {
+      "path": "libro/guia-del-taller/skills/draft/references/dialogue-and-subtext.md",
+      "sha256": "86157efa031a9420945dac2461abd096919296d15404fbb8164b6fa2d9610109",
+      "size": 6343
+    },
+    {
+      "path": "libro/guia-del-taller/skills/draft/references/narration-and-viewpoint.md",
+      "sha256": "bf3eaa0dffaa3ab9fe6f24a0e4f1f45f9167dc750acb2c80e754745e5b4776f1",
+      "size": 6357
+    },
+    {
+      "path": "libro/guia-del-taller/skills/draft/references/pace-and-transitions.md",
+      "sha256": "4951c3b11194b4f48fe35d4d98c6ab2b72c552e08879f6a75ece80cf4684d2a4",
+      "size": 5796
+    },
+    {
+      "path": "libro/guia-del-taller/skills/draft/references/voice-and-style.md",
+      "sha256": "b36d7c82ad284ba8f8659408d18ff4eb83d57794dcb8e3e09d9f2a1bb867a773",
+      "size": 6379
+    },
+    {
+      "path": "libro/guia-del-taller/skills/handoff/SKILL.md",
+      "sha256": "2cf561c5eeb3d5c4fe0712d6116acd80e63f658013a6aafa18e35f35a1a6444e",
+      "size": 4442
+    },
+    {
+      "path": "libro/guia-del-taller/skills/handoff/references/export.md",
+      "sha256": "fde39427afbf8f19d1bcead17b7e56792508f04b2aa08676f9f18e8dbeeca2ff",
+      "size": 3623
+    },
+    {
+      "path": "libro/guia-del-taller/skills/import/SKILL.md",
+      "sha256": "a7e9bca585c6834f1a41f71a5b7ec7cbbf2fc57f9e34001c8e222984909a767d",
+      "size": 7011
+    },
+    {
+      "path": "libro/guia-del-taller/skills/plan/SKILL.md",
+      "sha256": "a0c5f02c4f6c2c059be62284c7768287c2151804ac981302843a64b9cf0949e9",
+      "size": 4727
+    },
+    {
+      "path": "libro/guia-del-taller/skills/plan/references/chapter-and-scene-planning.md",
+      "sha256": "b87a9317b27057ce2ecb591e81ba445ede07cf69ab374745d8f50d9f152683cd",
+      "size": 16009
+    },
+    {
+      "path": "libro/guia-del-taller/skills/plan/references/character-arcs.md",
+      "sha256": "f5a74abbea9286b6bcd4e0d7303974ab901a23c2a7efb34c2ec8146d0a0dfd8f",
+      "size": 7767
+    },
+    {
+      "path": "libro/guia-del-taller/skills/plan/references/plot-alternatives.md",
+      "sha256": "b0f123e255f8ba0f7207136fa86f483be0148c7f263c056f04b263d15936a477",
+      "size": 7200
+    },
+    {
+      "path": "libro/guia-del-taller/skills/plan/references/revision-planning.md",
+      "sha256": "7d25f5e579a27e30be03f54dbc556a6e3e12df3c3c1c7dba5c16d4eba167e7b5",
+      "size": 7417
+    },
+    {
+      "path": "libro/guia-del-taller/skills/plan/references/worldbuilding.md",
+      "sha256": "406547d9bdb5db06873403f347cfa982d53da1694ea6d227008aa0b5aa1c61c5",
+      "size": 8342
+    },
+    {
+      "path": "libro/guia-del-taller/skills/research/SKILL.md",
+      "sha256": "bfa89fccb2831c519e5aabd249941116621e0c7e135b17ecfea5780cebf6780a",
+      "size": 5865
+    },
+    {
+      "path": "libro/guia-del-taller/skills/review/SKILL.md",
+      "sha256": "03d497d570be26611a4d49927544afe485f50b6499bfa16269d3f14ca048d21b",
+      "size": 4114
+    },
+    {
+      "path": "libro/guia-del-taller/skills/revise/SKILL.md",
+      "sha256": "9d4eea71a73f91a1bf73d55bf42b777612f2e2f3ce35c101536415fb4037a596",
+      "size": 4856
+    },
+    {
+      "path": "libro/guia-del-taller/templates/alternative.md",
+      "sha256": "794e57bb2523cd7ba418c8fbcbbd9b565525891cc78420c1f499d30b7325142c",
+      "size": 654
+    },
+    {
+      "path": "libro/guia-del-taller/templates/chapter.md",
+      "sha256": "59d79d3d4cb3e4223a2b38dd893ea8c1cf070357ac32da7980171c6adfaeefe0",
+      "size": 570
+    },
+    {
+      "path": "libro/guia-del-taller/templates/character.md",
+      "sha256": "0db2265dcdd01fa0bc287fdf6e062d3fb71645c2d653efb3ec93317679d632ac",
+      "size": 1495
+    },
+    {
+      "path": "libro/guia-del-taller/templates/creative-direction.md",
+      "sha256": "575d3ebc47ef7419545073544c544d133d4cf440c0c7faa44d4716e930d0fdc7",
+      "size": 873
+    },
+    {
+      "path": "libro/guia-del-taller/templates/faction.md",
+      "sha256": "e7196dd4b3e526a04c6a85d087096a2617bb03eddc54181a2b06a987bbfcfae3",
+      "size": 1053
+    },
+    {
+      "path": "libro/guia-del-taller/templates/finding.md",
+      "sha256": "8847b62a3960f647e6b8a035f8e81e81a322071ada10c0432a2d3a0a1653be66",
+      "size": 903
+    },
+    {
+      "path": "libro/guia-del-taller/templates/import-inventory.md",
+      "sha256": "9c5f763f688ee858b0c073d7c2bab8b118cc58c661b250b583f32ccb498027ca",
+      "size": 1374
+    },
+    {
+      "path": "libro/guia-del-taller/templates/location.md",
+      "sha256": "5511117e11ddb54c5c89c6885327c23ac8c269c5c98ec73611fe206a9a055667",
+      "size": 1135
+    },
+    {
+      "path": "libro/guia-del-taller/templates/plan.md",
+      "sha256": "a230ca4da068e99cedd9e91656111ef20bf557af89b918569b02a257c9eeaaa8",
+      "size": 1037
+    },
+    {
+      "path": "libro/guia-del-taller/templates/relationship.md",
+      "sha256": "af9b91d527370c93bdfc7d8862a44f1240d344678064e486f0a610f7073274cc",
+      "size": 1049
+    },
+    {
+      "path": "libro/guia-del-taller/templates/research-brief.md",
+      "sha256": "ce8ef360a0892811b5f3283e583c7dbaa964bee09a9c5befbb04cb0b23f5010b",
+      "size": 1048
+    },
+    {
+      "path": "libro/guia-del-taller/templates/revision-backlog.md",
+      "sha256": "486bcde0745a3f77b0a9d835c00a086f857aba2c8820d03273260764dc0f6b58",
+      "size": 252
+    },
+    {
+      "path": "libro/guia-del-taller/templates/session-log.md",
+      "sha256": "a76ef7ebf08dabd97058dd16b3a1ddb6e4da15afc2c959b926ce61bccf6ab58e",
+      "size": 1130
+    },
+    {
+      "path": "libro/guia-del-taller/templates/source.md",
+      "sha256": "1468fff12f66bb7d516c8799fd33e5418dbcd2bf7c2584eb3c33fce94dd78f9b",
+      "size": 1145
+    },
+    {
+      "path": "libro/guia-del-taller/templates/status.md",
+      "sha256": "96ce90d1f9a314cb27db8563f7cb53cccad45124dbe5d2d72c20facbe66baa7b",
+      "size": 604
+    },
+    {
+      "path": "libro/guia-del-taller/templates/timeline-event.md",
+      "sha256": "f182103dbfc1f4ec44d2e2e4838d2d5940fafb9c0b25400dcf8a79be83e207e2",
+      "size": 1191
+    },
+    {
+      "path": "libro/guia-del-taller/templates/topic.md",
+      "sha256": "25ae0855f8b2e75dab433badc8b1b3ff3d63e4010393a667c35da7b0f7ef53f2",
+      "size": 541
+    },
+    {
+      "path": "libro/guia-del-taller/templates/world-rule.md",
+      "sha256": "0198234da71963ab1f9e73a1ca50e4c042eaf1476abf500a31a3c05260e1fe49",
+      "size": 1166
+    },
+    {
       "path": "libro/importaciones/inventario.md",
-      "sha256": "560f6e15dbbddd2a854de454344fcd012f06e8d8366cdd3779f18a75ab27ffc3",
-      "size": 1143
+      "sha256": "93bd557fbb76165c3fb735cdc1af586f26407cb39411c9ed84ed7815d5da6d7b",
+      "size": 1164
     },
     {
       "path": "libro/inicio.md",
-      "sha256": "e4e12e1a42eccede56f5bf24aa142229dc82a701ddbb09a6d67f3206d8cd58d6",
-      "size": 3006
+      "sha256": "c508692ce5c138d793b58deb5b1c1d04325a0c8196ba9b73d2cf7c60f846330d",
+      "size": 3337
     },
     {
       "path": "libro/investigacion/fuentes/11-13-elemental-idea-qa.md",
@@ -482,8 +707,8 @@
     },
     {
       "path": "release-allowlist.json",
-      "sha256": "5350d939975454a3f3576d0481c552ad3d232891e58050edf4bc37b634c21407",
-      "size": 1851
+      "sha256": "ef03098a22b5e4744272dd731c54724b9f8660ed79f8086f13a82c438a2d1882",
+      "size": 2007
     },
     {
       "path": "requirements.lock",

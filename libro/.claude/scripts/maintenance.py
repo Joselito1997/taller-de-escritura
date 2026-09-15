@@ -5,7 +5,7 @@ import json
 from book import Book, encoded, parse_json, sha, result
 from schemas import require, HASH
 
-ROOT_FILES = {'README.md', 'LICENSE', 'LICENCIA.md', 'requirements.lock', 'starter-manifest.json', 'compatibility.json', 'release-manifest.json', 'release-allowlist.json'}
+ROOT_FILES = {'.gitattributes', 'README.md', 'LICENSE', 'LICENCIA.md', 'requirements.lock', 'starter-manifest.json', 'compatibility.json', 'release-manifest.json', 'release-allowlist.json', 'CLAUDE.md', 'instalar.py', 'instalar.sh', 'instalar.ps1', 'installation/start.js', 'installation/windows_start.py'}
 # Licencias, avisos, procedencia y fuentes de reconstrucción distribuidos; rutas exactas, no carpetas de vendor.
 VENDOR_FILES = {'vendor/claudian/' + name for name in ('LICENSE', 'THIRD_PARTY_NOTICES.md', 'provenance.json', 'SHA256SUMS', 'README.md', 'spanish-ui.patch', 'rebuild.py')} | {'vendor/kanban/' + name for name in ('LICENSE.md', 'provenance.json', 'README.md', 'es.patch', 'es.ts', 'rebuild.sh', 'upstream.tar.gz')}
 
@@ -16,7 +16,7 @@ def consent(manifest):
 
 def package_path(path):
     require(isinstance(path, str) and path and not path.startswith('/') and all(p not in ('', '.', '..') for p in path.split('/')), 'Ruta de paquete inválida.', 'path-outside-scope')
-    allowed = path in ROOT_FILES or path in VENDOR_FILES or path == 'libro/CLAUDE.md' or path == 'libro/.mcp.json' or path == 'libro/.claude/settings.template.json' or path.startswith(('libro/.claude/scripts/', 'libro/.claude/skills/', 'libro/.claude/references/', 'libro/.claude/templates/', 'libro/investigacion/fuentes/', 'libro/investigacion/temas/')) or path == 'libro/investigacion/indice.md' or path.startswith(('vendor/claudian/plugin/', 'vendor/kanban/plugin/'))
+    allowed = path in ROOT_FILES or path in VENDOR_FILES or path == 'libro/CLAUDE.md' or path == 'libro/.mcp.json' or path == 'libro/.claude/settings.template.json' or path.startswith(('libro/.claude/scripts/', 'libro/.claude/skills/', 'libro/.claude/references/', 'libro/.claude/templates/', 'libro/guia-del-taller/', 'libro/investigacion/fuentes/', 'libro/investigacion/temas/')) or path == 'libro/investigacion/indice.md' or path.startswith(('vendor/claudian/plugin/', 'vendor/kanban/plugin/'))
     require(allowed and not any(p in ('__pycache__', '.env', 'node_modules') for p in PurePosixPath(path).parts), 'El archivo no pertenece al ámbito de actualización del sistema.', 'path-outside-scope')
     return path
 

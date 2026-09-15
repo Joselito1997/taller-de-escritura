@@ -2,10 +2,11 @@
   "schema_version": 1,
   "release": {
     "name": "taller-de-escritura",
-    "version": "0.1.1-candidato"
+    "version": "0.1.3-candidato"
   },
   "archive_root": "taller-de-escritura",
   "files": [
+    ".gitattributes",
     ".gitignore",
     "CLAUDE.md",
     "LICENCIA.md",
@@ -46,7 +47,9 @@
     "vendor/kanban/plugin/styles.css",
     "vendor/kanban/provenance.json",
     "vendor/kanban/rebuild.sh",
-    "vendor/kanban/upstream.tar.gz"
+    "vendor/kanban/upstream.tar.gz",
+    "instalar.ps1",
+    "installation/windows_start.py"
   ],
   "prefixes": [
     {
@@ -63,6 +66,10 @@
     },
     {
       "prefix": "libro/.claude/templates/",
+      "suffix": ".md"
+    },
+    {
+      "prefix": "libro/guia-del-taller/",
       "suffix": ".md"
     }
   ],

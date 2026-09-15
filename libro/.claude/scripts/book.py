@@ -77,6 +77,9 @@ def process_identity(pid):
     """Inicio real del proceso. None nunca demuestra que el dueño murió."""
     if type(pid) is not int or pid <= 0:
         return None
+    if sys.platform == 'win32':
+        from windows_files import identity
+        return identity(pid)
     if sys.platform == 'darwin':
         class BSDInfo(ctypes.Structure):
             _fields_ = [('prefix', ctypes.c_uint32 * 12), ('comm', ctypes.c_char * 16), ('name', ctypes.c_char * 32), ('middle', ctypes.c_uint32 * 6), ('seconds', ctypes.c_uint64), ('microseconds', ctypes.c_uint64)]
@@ -102,11 +105,14 @@ def proven_dead(owner):
     if owner['hostname'] != socket.gethostname() or process_identity(os.getpid()) is None:
         return False
     recorded = owner.get('process_start_identity')
-    if not isinstance(recorded, str) or not recorded.startswith(process_identity(os.getpid()).split(':')[0] + ':') or not re.fullmatch(r'(?:darwin:[0-9]+:[0-9]+|linux:[0-9a-f-]{36}:[0-9]+)', recorded):
+    if not isinstance(recorded, str) or not recorded.startswith(process_identity(os.getpid()).split(':')[0] + ':') or not re.fullmatch(r'(?:darwin:[0-9]+:[0-9]+|linux:[0-9a-f-]{36}:[0-9]+|windows:[0-9]+)', recorded):
         return False
     current = process_identity(owner['pid'])
     if current is not None:
         return current != owner['process_start_identity']
+    if sys.platform == 'win32':
+        from windows_files import dead
+        return dead(owner['pid'])
     try:
         os.kill(owner['pid'], 0)
     except ProcessLookupError:
@@ -128,9 +134,13 @@ class Book:
         require(raw.is_dir() and not raw.is_symlink(), 'La bóveda no es un directorio válido.', 'path-outside-scope')
         # No resolver silenciosamente un antecesor enlazado.
         require(raw == raw.resolve(), 'La ruta de la bóveda contiene enlaces.', 'path-outside-scope')
-        require(hasattr(os, 'O_NOFOLLOW') and hasattr(os, 'O_DIRECTORY'), 'Este sistema no dispone de las operaciones de archivo verificadas; conserve propuestas separadas y solicite una instalación compatible.', 'unsupported-format')
         self.root = raw
-        self.root_fd = os.open(raw, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        if os.name == 'nt':
+            from windows_files import WindowsFiles
+            self.windows = WindowsFiles(self)
+        else:
+            require(hasattr(os, 'O_NOFOLLOW') and hasattr(os, 'O_DIRECTORY'), 'Este sistema no dispone de las operaciones de archivo verificadas; conserve propuestas separadas y solicite una instalación compatible.', 'unsupported-format')
+            self.root_fd = os.open(raw, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
         self.capability = cooperative_capability
         self.checkpoint = checkpoint or (lambda phase, operation: None)
 
@@ -138,6 +148,8 @@ class Book:
         require(isinstance(relative, str) and relative and '\\' not in relative and '\x00' not in relative, 'Ruta inválida.', 'path-outside-scope')
         parts = PurePosixPath(relative).parts
         require(not relative.startswith('/') and all(p not in ('', '.', '..') for p in relative.split('/')), 'La ruta sale del alcance.', 'path-outside-scope')
+        if os.name == 'nt':
+            require(all(not any(c in p for c in ':<>"|?*') and not p.endswith((' ', '.')) and not re.fullmatch(r'(?i)(CON|PRN|AUX|NUL|COM[0-9]|LPT[0-9])(?:\..*)?', p) for p in parts), 'Nombre reservado o ruta alternativa de Windows.', 'path-outside-scope')
         if shared:
             allowed = relative in ROOT_FILES or (parts[0] in CONTENT_ROOTS and len(parts) > 1)
             allowed |= parts[0] == 'importaciones' and (relative == 'importaciones/inventario.md' or len(parts) > 2 and parts[1] == 'derivados')
@@ -149,6 +161,7 @@ class Book:
             if current.is_symlink():
                 raise Problem('path-outside-scope', f'No se permiten enlaces simbólicos: {relative}.')
             if current.exists():
+                require(not getattr(current.lstat(), 'st_file_attributes', 0) & 0x400, 'No se permiten puntos de reanálisis.', 'path-outside-scope')
                 mode = current.stat().st_mode
                 require(stat.S_ISREG(mode) or stat.S_ISDIR(mode), 'Tipo de archivo no permitido.', 'path-outside-scope')
                 if stat.S_ISREG(mode):
@@ -156,6 +169,8 @@ class Book:
         return current
 
     def __del__(self):
+        if hasattr(self, 'windows'):
+            self.windows.close()
         if hasattr(self, 'root_fd'):
             os.close(self.root_fd)
 
@@ -185,6 +200,8 @@ class Book:
             os.close(fd)
 
     def read(self, relative, shared=False, max_bytes=None):
+        if hasattr(self, 'windows'):
+            return self.windows.read(relative, shared, max_bytes)
         self.path(relative, shared=shared)
         try:
             with self.parent_fd(relative) as (parent, name):
@@ -199,11 +216,15 @@ class Book:
             return None
 
     def unlink(self, relative):
+        if hasattr(self, 'windows'):
+            return self.windows.unlink(relative)
         with self.parent_fd(relative) as (parent, name):
             os.unlink(name, dir_fd=parent)
             os.fsync(parent)
 
     def new_directory(self, relative):
+        if hasattr(self, 'windows'):
+            return self.windows.new_directory(relative)
         with self.parent_fd(relative, create=True) as (parent, name):
             try:
                 os.mkdir(name, dir_fd=parent)
@@ -211,7 +232,18 @@ class Book:
                 raise Problem('invalid-input', 'El directorio de destino ya existe; no se reutiliza.') from exc
             os.fsync(parent)
 
+    def ensure_directories(self):
+        from schemas import VAULT_DIRECTORIES
+        for relative in VAULT_DIRECTORIES:
+            path = self.path(relative)
+            if not path.exists():
+                self.new_directory(relative)
+            require(path.is_dir(), 'Una ruta prevista como carpeta contiene un archivo: ' + relative, 'path-outside-scope')
+        return list(VAULT_DIRECTORIES)
+
     def durable(self, relative, data, *, exclusive=False):
+        if hasattr(self, 'windows'):
+            return self.windows.write(relative, data, exclusive=exclusive)
         with self.parent_fd(relative, create=True) as (parent, name):
             temporary = name if exclusive else '.book-' + str(uuid.uuid4())
             fd = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=parent)
@@ -425,6 +457,8 @@ class Book:
             return self.read(relative + '.md')
         if not PurePosixPath(relative).suffix:
             relative += '.md'
+        if relative.startswith('guia-del-taller/') and relative.endswith('.md'):
+            return self.read(relative)
         return self.read(relative, shared=True)
 
     def inspect(self, manifest):
@@ -473,6 +507,9 @@ class Book:
         self.audit_internal()
         if manifest and manifest.get('action') == 'inspect':
             return self.inspect(manifest)
+        if manifest and manifest.get('action') in ('layout', 'import-coverage'):
+            import runtime
+            return runtime.layout(self) if manifest['action'] == 'layout' else runtime.import_coverage(self)
         if manifest and manifest.get('action') in ('search', 'board', 'readiness'):
             import runtime
             return runtime.search(self, manifest) if manifest['action'] == 'search' else runtime.readiness(self) if manifest['action'] == 'readiness' else runtime.board(self)
@@ -628,6 +665,8 @@ class Book:
             self.protected(write, before, candidate)
             entries.append(dict(target=write['target'], before=f'{history}/{i}.before' if before is not None else None, candidate=f'{history}/{i}.candidate'))
             candidates[write['target']] = candidate
+        if 'estado.md' in candidates:
+            self.require_import_completion(candidates['estado.md'])
         # Identidades globales incluyendo creaciones dentro de la misma operación.
         ids = set()
         for target in sorted(set(self.content_paths()) | set(candidates)):
@@ -662,8 +701,23 @@ class Book:
         # Una bandera CLI, install.json o un disco tranquilo no prueban la UI.
         return callable(self.capability) and self.capability(self.root, manifest) is True
 
+    def require_import_completion(self, candidate):
+        if not any(self.path('.writing/imports').glob('*.json')):
+            return
+        current = self.read('estado.md')
+        old_stage = identity_parts(current)[0].get('stage') if current else None
+        new_stage = validate(candidate)['metadata'].get('stage')
+        if old_stage in (None, 'setup', 'import', 'reconstruct') and new_stage not in ('setup', 'import', 'reconstruct'):
+            from runtime import import_coverage
+            coverage = import_coverage(self)
+            require(coverage['complete'], 'Complete y compruebe los registros de la importación antes de avanzar: ' + '; '.join(coverage['issues']), 'incomplete-import')
+
     def replace_shared(self, write, candidate):
         self.path(write['target'], shared=True)
+        if write['target'] == 'estado.md':
+            self.require_import_completion(candidate)
+        if hasattr(self, 'windows'):
+            return self.windows.write(write['target'], candidate, exclusive=write['expected_file_sha256'] is None, expected=write['expected_file_sha256'], shared=True)
         with self.parent_fd(write['target'], create=True) as (parent, target):
             temporary = '.book-' + str(uuid.uuid4())
             fd = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=parent)

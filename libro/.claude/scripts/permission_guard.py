@@ -5,6 +5,30 @@ import re
 import shlex
 import sys
 
+POWERSHELL_UTF8 = '$OutputEncoding = [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new();\n'
+
+def powershell_prefix(python, script, vault):
+    return '& ' + ' '.join("'" + value.replace("'", "''") + "'" for value in (python, script, '--vault', vault))
+
+
+def allowed_powershell(command, python, script, vault):
+    if not isinstance(command, str):
+        return False
+    command = command.replace('\r\n', '\n')
+    if not command.startswith(POWERSHELL_UTF8):
+        return False
+    command = command[len(POWERSHELL_UTF8):]
+    prefix = powershell_prefix(python, script, vault)
+    if command in (prefix + ' ' + operation for operation in ('readiness', 'check', 'recover')):
+        return True
+    match = re.fullmatch(r"@'\n(.*)\n'@ \| " + re.escape(prefix) + r" (check|snapshot|apply|diff|restore|recover|import|export) --manifest -", command, re.S)
+    if not match or any(line.startswith("'@") for line in match[1].splitlines()):
+        return False
+    try:
+        return isinstance(json.loads(match[1]), dict)
+    except ValueError:
+        return False
+
 
 def allowed(command, python, script, vault):
     if not isinstance(command, str):
@@ -40,7 +64,10 @@ def main():
     script = str(Path(vault) / '.claude/scripts/book.py')
     try:
         event = json.load(sys.stdin)
-        permit = event.get('tool_name') == 'Bash' and allowed(event.get('tool_input', {}).get('command'), sys.executable, script, vault)
+        if sys.platform == 'win32':
+            permit = event.get('tool_name') == 'PowerShell' and allowed_powershell(event.get('tool_input', {}).get('command'), sys.executable, script, vault)
+        else:
+            permit = event.get('tool_name') == 'Bash' and allowed(event.get('tool_input', {}).get('command'), sys.executable, script, vault)
     except (ValueError, TypeError, AttributeError):
         permit = False
     print(json.dumps({'hookSpecificOutput': {'hookEventName': 'PreToolUse', 'permissionDecision': 'allow' if permit else 'deny', 'permissionDecisionReason': 'Use únicamente el helper de esta bóveda con un manifiesto JSON literal; no se permite escritura directa ni shell general.'}}, ensure_ascii=False))

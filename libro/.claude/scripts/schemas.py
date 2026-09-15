@@ -10,8 +10,26 @@ STAGES = {'setup', 'import', 'reconstruct', 'assess', 'revise-existing', 'contin
 BOARD_STATES = dict(zip(('Por hacer', 'En curso', 'Esperando al autor', 'En espera de otra tarea', 'Para después', 'Terminado'), ('up-next', 'in-progress', 'awaiting-author', 'waiting', 'later', 'done')))
 LOG_HEADINGS = ('Resumen', 'Trabajo realizado', 'Cambios y motivos', 'Aceptado por el autor', 'Alternativas', 'Registros actualizados', 'Pendientes', 'Etapa y aceptación', 'Próximo paso', 'Notas del autor', 'Puntos de guardado')
 PATH_MAP = {'book': 'libro', 'index.md': 'inicio.md', 'status.md': 'estado.md', 'creative-direction.md': 'direccion-creativa.md', 'revision-backlog.md': 'trabajo-pendiente.md', 'manuscript': 'manuscrito', 'story': 'historia', 'characters': 'personajes', 'relationships': 'relaciones', 'locations': 'lugares', 'factions': 'facciones', 'world-rules.md': 'reglas-del-mundo.md', 'timeline.md': 'cronologia.md', 'plans': 'planes', 'alternatives': 'alternativas', 'logs': 'bitacora', 'imports': 'importaciones', 'inventory.md': 'inventario.md', 'research': 'investigacion', 'sources': 'fuentes', 'topics': 'temas', 'briefs': 'informes', 'originals': 'originales', 'derived': 'derivados', 'exports': 'exportaciones'}
+# Catálogo físico relativo a libro/. Un nombre .md sigue siendo un archivo.
+VAULT_DIRECTORIES = tuple(sorted({PATH_MAP[key] for key in ('manuscript', 'story', 'plans', 'alternatives', 'logs', 'imports', 'research', 'exports')}
+    | {PATH_MAP['story'] + '/' + PATH_MAP[key] for key in ('characters', 'relationships', 'locations', 'factions')}
+    | {PATH_MAP[area] + '/' + PATH_MAP[key] for area in ('imports', 'research') for key in ('originals', 'derived')}
+    | {PATH_MAP['research'] + '/' + PATH_MAP[key] for key in ('sources', 'topics', 'briefs')}))
+IMPORT_RECORDS = {
+    'personajes': ('historia/personajes/', ('character',)),
+    'relaciones': ('historia/relaciones/', ('relationship',)),
+    'lugares': ('historia/lugares/', ('location',)),
+    'facciones': ('historia/facciones/', ('faction',)),
+    'reglas': ('historia/reglas-del-mundo.md', ('world-rule',)),
+    'cronologia': ('historia/cronologia.md', ('timeline-event',)),
+    'planes': ('planes/', ('plan', 'finding')),
+    'alternativas': ('alternativas/', ('alternative',)),
+    'fuentes': ('investigacion/fuentes/', ('source',)),
+    'temas': ('investigacion/temas/', ('topic',)),
+    'informes': ('investigacion/informes/', ('research-brief',)),
+}
 TYPES = {'status', 'creative-direction', 'chapter', 'character', 'relationship', 'location', 'faction', 'world-rule', 'timeline-event', 'plan', 'alternative', 'finding', 'source', 'topic', 'research-brief', 'import-inventory', 'session-log', 'index'}
-KNOWN_FIELDS = {'index_kind', 'schema_version', 'id', 'type', 'tags', 'aliases', 'title', 'name', 'subject', 'scope', 'language', 'narrative_choices', 'stage', 'focus', 'active_log', 'next_action', 'role', 'started', 'closed', 'status', 'previous', 'workflows', 'targets', 'stage_at_start', 'stage_at_close', 'acceptances', 'participants', 'story_date', 'precision', 'order_before', 'order_after', 'decision_status', 'target', 'selection_status', 'based_on', 'applied_to', 'kind', 'severity', 'board_task_id', 'author', 'URL', 'url', 'publication_date', 'captured_at', 'source_kind', 'original', 'coverage', 'sha256', 'reuse_status', 'sources', 'question', 'limits', 'entries', 'basis', 'provenance', 'as_of', 'disposition', 'depends_on', 'predecessors'}
+KNOWN_FIELDS = {'index_kind', 'schema_version', 'id', 'type', 'tags', 'aliases', 'title', 'name', 'subject', 'scope', 'language', 'narrative_choices', 'stage', 'focus', 'active_log', 'next_action', 'role', 'started', 'closed', 'status', 'previous', 'workflows', 'targets', 'stage_at_start', 'stage_at_close', 'acceptances', 'participants', 'story_date', 'precision', 'order_before', 'order_after', 'decision_status', 'target', 'selection_status', 'based_on', 'applied_to', 'kind', 'severity', 'board_task_id', 'author', 'URL', 'url', 'publication_date', 'captured_at', 'source_kind', 'original', 'coverage', 'sha256', 'reuse_status', 'sources', 'question', 'limits', 'entries', 'basis', 'provenance', 'as_of', 'disposition', 'depends_on', 'predecessors', 'reconstruction'}
 HASH = re.compile(r'^[0-9a-f]{64}$')
 KANBAN_SETTINGS = re.compile(r'%% kanban:settings\s*```(?:json)?\s*(.*?)\s*```\s*%%', re.S)
 BLOCK = re.compile(r'\^((?:sc-|task-|claim-)[A-Za-z0-9-]+)(?=\s|$)')

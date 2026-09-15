@@ -3,6 +3,7 @@ schema_version: 1
 id: "e7d6203b-12a4-5030-93a1-f04a32c011f5"
 type: "import-inventory"
 entries: []
+reconstruction: null
 ---
 
 # Inventario de importación

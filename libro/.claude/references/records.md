@@ -33,7 +33,21 @@ Los registros activos tienen `schema_version: 1`, `id` inmutable y `type`. No ca
 | [session-log](../templates/session-log.md) | `session-log`: sesión, decisiones, versiones, resultados y puntos de guardado |
 | [revision-backlog](../templates/revision-backlog.md) | Formato `kanban`: único estado de trabajo, seis columnas, tarjetas e historial |
 
-Los planes y hallazgos viven en `planes/`; alternativas, en `alternativas/`. Personajes, relaciones, lugares y facciones se crean cuando hacen falta en `historia/personajes/`, `historia/relaciones/`, `historia/lugares/`, `historia/facciones/`. Reglas y cronología empiezan en `historia/reglas-del-mundo.md` e `historia/cronologia.md` cuando existan hechos, con registros vinculados si crecen. No precargues una historia de ejemplo en esos destinos.
+Los planes y hallazgos viven en `planes/`; alternativas, en `alternativas/`. Las carpetas de personajes, relaciones, lugares y facciones existen desde la instalación en `historia/personajes/`, `historia/relaciones/`, `historia/lugares/`, `historia/facciones/`. Reglas y cronología empiezan en `historia/reglas-del-mundo.md` e `historia/cronologia.md` cuando existan hechos, con registros vinculados si crecen. Todas las carpetas de contenido se crean vacías desde la instalación, según `VAULT_DIRECTORIES` en `schemas.py`; `check action: layout` informa su existencia real. No se crean archivos ficticios ni plantillas vacías para poblarlas. Cualquier información aportada sobre una entidad basta para crear su nota durante la importación.
+
+## Cobertura obligatoria de la importación
+
+La importación debe registrar toda información disponible, aunque sea escasa. Cada personaje o entidad identificable recibe una nota mínima respaldada; no exijas biografía, nombre propio, protagonismo, utilidad ni un mínimo de palabras. Los campos sin datos quedan null u omitidos. Una referencia breve no permite inventar rasgos. Mantén un dato del documento de idea separado de lo que muestran los capítulos, una posibilidad separada de un hecho y versiones contradictorias sin elegir por tu cuenta.
+
+Recorre las categorías de `IMPORT_RECORDS` en `schemas.py`: personajes, relaciones, lugares, facciones, reglas, cronología, planes, alternativas, fuentes, temas e informes. Usa sus destinos y moldes. Registra planes o informes que ya existan en lo aportado, sin crear nuevas tareas de planificación o investigación. Manuscrito, originales, derivados, inventario, estado, tablero y bitácora conservan además sus obligaciones habituales. `exportaciones/` permanece vacía hasta una exportación solicitada; una carpeta vacía no es trabajo pendiente si las fuentes no contienen información para ella. No produzcas documentos ni datos para llenar carpetas.
+
+En la cabecera del inventario conserva `reconstruction`:
+
+- `reviewed_sources`: mapa de ruta original conservada a su SHA256, para todas las fuentes revisadas. `check action: import-coverage` devuelve el alcance real en `source_scope`; leerlo no sustituye leer las fuentes.
+- `categories`: un objeto por cada categoría, con `status: recorded`, `no-source` o `pending` y `records: [{path, sha256}]`. Usa hashes reales de notas ya guardadas, obtenidos de los resultados del helper. `recorded` exige notas en la ruta y tipo de esa categoría. Una nota parcial con un solo dato cuenta; desconocidos no impiden guardarla.
+- `no-source` solo significa que, después de revisar las fuentes del alcance, no existe información para esa categoría; deja `records: []` y explica la ausencia en `reason`. No significa poca información, poca importancia o falta de tiempo. Si no has leído una fuente o no preparaste una nota necesaria, usa `pending` con el motivo.
+
+Presenta las notas propuestas junto con la reconstrucción, sin pedir otra autorización para prepararlas. Después de guardar y anotar las operaciones en bitácora, ejecuta `check action: import-coverage`. Solo `complete: true` permite declarar el cierre. El helper comprueba categorías declaradas, rutas, tipos, hashes, fuentes, carpetas y operaciones sin registrar; no puede demostrar por sí solo que el asistente haya reconocido todas las entidades del texto. Relee el material por categorías antes del cierre para contrastar que ninguna mención respaldada quedó solo en los originales. Si hay límites reales, declara qué parte falta; no reduzcas el alcance en silencio.
 
 ## Escenas y evidencia exacta
 

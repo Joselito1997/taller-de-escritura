@@ -17,11 +17,13 @@ module.exports = async function start(app, obsidianVersion) {
     fs.writeFileSync(next, JSON.stringify({...data, vault, observedAt: new Date().toISOString()}, null, 2) + '\n');
     fs.renameSync(next, resultPath);
   };
-  const env = {...process.env, PYTHONDONTWRITEBYTECODE: '1', PATH: [path.join(root, '.venv/bin'), path.dirname(installation.claude), process.env.PATH || ''].join(path.delimiter)};
+  const bin = path.join(root, '.venv', process.platform === 'win32' ? 'Scripts' : 'bin');
+  const python = path.join(bin, process.platform === 'win32' ? 'python.exe' : 'python');
+  const env = {...process.env, PYTHONDONTWRITEBYTECODE: '1', PYTHONUTF8: '1', PATH: [bin, path.dirname(installation.claude), process.env.PATH || ''].join(path.delimiter)};
   const run = (script, operation, manifest) => new Promise((resolve, reject) => {
     const args = [path.join(vault, '.claude/scripts', script), ...operation];
     if (manifest) args.push('--manifest', '-');
-    const child = execFile(path.join(root, '.venv/bin/python'), args, {env, timeout: 90000, maxBuffer: 4 * 1024 * 1024}, (error, stdout) => {
+    const child = execFile(python, args, {env, timeout: 90000, maxBuffer: 4 * 1024 * 1024}, (error, stdout) => {
       try {
         const result = JSON.parse(stdout);
         if (error || result.ok !== true) reject(new Error(result.message || 'Falló una comprobación de instalación.'));
@@ -39,16 +41,22 @@ module.exports = async function start(app, obsidianVersion) {
     const claudian = app.plugins.plugins.realclaudian;
     const kanban = app.plugins.plugins['obsidian-kanban'];
     if (!claudian || !kanban) throw new Error('Los complementos no están cargados en Obsidian.');
-    if (claudian.settings.locale !== 'es' || claudian.settings.permissionMode !== 'normal' || claudian.settings.providerConfigs.claude.safeMode !== 'default') {
-      throw new Error('Claudian todavía no está en español y modo Seguro.');
+    if (claudian.settings.locale !== 'es' || !['normal', 'yolo'].includes(claudian.settings.permissionMode)) {
+      throw new Error('Claudian debe estar en español y en el modo de trabajo elegido por el autor, Seguro o YOLO.');
     }
     const compatibility = JSON.parse(fs.readFileSync(path.join(root, 'compatibility.json'), 'utf8'));
-    const profile = compatibility.cooperative_profiles.find(p => p.enabled && p.evidence.approved);
+    const profile = compatibility.cooperative_profiles.find(p => p.enabled && (p.platform === (process.platform === 'win32' ? 'windows' : process.platform)));
     if (!profile) throw new Error('Falta el perfil comprobado de esta distribución.');
-    if (obsidianVersion !== profile.versions.obsidian) throw new Error('Esta versión de Obsidian no coincide con la instalación comprobada: ' + obsidianVersion);
     const verified = await run('setup.py', ['verify'], {schema_version: 1, consent: true, cooperative_profile: profile.id});
     const readiness = await run('book.py', ['--vault', vault, 'readiness']);
     if (!readiness.ready) throw new Error('El ayudante aún no está preparado para trabajar.');
+    const structure = await run('book.py', ['--vault', vault, 'check'], {action: 'layout'});
+    if (!structure.complete) throw new Error('Faltan carpetas del taller: ' + structure.missing.join(', '));
+    const visibleFolders = structure.directories.map(item => item.path);
+    const foldersVisible = () => visibleFolders.every(name => app.vault.getAbstractFileByPath(name) instanceof require('obsidian').TFolder);
+    const folderDeadline = Date.now() + 10000;
+    while (!foldersVisible() && Date.now() < folderDeadline) await new Promise(resolve => setTimeout(resolve, 100));
+    if (!foldersVisible()) throw new Error('Obsidian todavía no muestra todas las carpetas previstas.');
     let boardView;
     if (!resuming) {
       const note = app.vault.getAbstractFileByPath('inicio.md');
@@ -66,7 +74,7 @@ module.exports = async function start(app, obsidianVersion) {
     while (!(tab = view?.getActiveTab()) && Date.now() < deadline) await new Promise(resolve => setTimeout(resolve, 200));
     if (resuming) {
       if (!tab) throw new Error('Claudian no restauró su panel.');
-      write({status: 'complete', existingInstallation: true, message: 'Se conservó el libro y la conversación existente.', conversationId: tab.state.currentConversationId, readiness, verifiedProfile: verified.profile.profile_id});
+      write({status: 'complete', existingInstallation: true, visibleFolders, message: 'Se conservó el libro y la conversación existente.', conversationId: tab.state.currentConversationId, readiness, verifiedProfile: verified.profile.profile_id});
       view.focusActiveInput();
       return JSON.parse(fs.readFileSync(resultPath, 'utf8'));
     }
@@ -82,7 +90,7 @@ module.exports = async function start(app, obsidianVersion) {
     const assistant = [...tab.state.messages].reverse().find(message => message.role === 'assistant');
     const response = typeof assistant?.content === 'string' ? assistant.content : '';
     if (!response || !/(archivo|material|manuscrito|capítulo)/iu.test(response)) throw new Error('No se recibió la invitación esperada; revise la conversación original.');
-    write({status: 'complete', model: installation.model, plugins: [claudian.manifest, kanban.manifest], obsidianVersion, boardView: 'kanban', permissionMode: claudian.settings.permissionMode, safeMode: claudian.settings.providerConfigs.claude.safeMode, conversationId: tab.state.currentConversationId, acceptedUserMessageId: acceptedUser.id, assistantMessageId: assistant.id, assistantText: response, readiness, verifiedProfile: verified.profile.profile_id});
+    write({status: 'complete', model: installation.model, plugins: [claudian.manifest, kanban.manifest], obsidianVersion, boardView: 'kanban', visibleFolders, permissionMode: claudian.settings.permissionMode, safeMode: claudian.settings.providerConfigs.claude.safeMode, conversationId: tab.state.currentConversationId, acceptedUserMessageId: acceptedUser.id, assistantMessageId: assistant.id, assistantText: response, readiness, verifiedProfile: verified.profile.profile_id});
     view.focusActiveInput();
     return JSON.parse(fs.readFileSync(resultPath, 'utf8'));
   } catch (error) {

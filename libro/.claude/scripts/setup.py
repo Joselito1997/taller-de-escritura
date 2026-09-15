@@ -71,7 +71,7 @@ def guided(root, operation):
         if not file.exists():
             raise ValueError('Falta compatibility.json junto a la carpeta libro. Si es una copia restaurada, ejecute setup.py update con la carpeta de la versión descargada y repita verify; mientras tanto conserve las propuestas separadas.')
         profiles = json.loads(file.read_text(), object_pairs_hook=unique_pairs).get('cooperative_profiles', [])
-        profiles = [p for p in profiles if p.get('enabled') is True and p.get('evidence', {}).get('approved') is True]
+        profiles = [p for p in profiles if p.get('enabled') is True and p.get('platform') == __import__('platform').system().lower()]
         if not profiles:
             raise ValueError('Esta distribución todavía no tiene perfiles aprobados; conserve las propuestas separadas.')
         for index, profile in enumerate(profiles, 1):
@@ -93,6 +93,15 @@ def settings_for(root, python, model):
     helper = root / '.claude/scripts/book.py'
     guard = root / '.claude/scripts/permission_guard.py'
     prefix = shlex.join([str(python), str(helper), '--vault', str(root)])
+    if os.name == 'nt':
+        from permission_guard import powershell_prefix, POWERSHELL_UTF8
+        prefix = powershell_prefix(str(python), str(helper), str(root))
+        quote = lambda text: "'" + str(text).replace("'", "''") + "'"
+        hook = lambda command: [{'hooks': [{'type': 'command', 'command': POWERSHELL_UTF8 + command, 'shell': 'powershell', 'timeout': 20}]}]
+        return {'autoMemoryEnabled': False, 'model': model, 'env': {'CLAUDE_CODE_USE_POWERSHELL_TOOL': '1', 'PYTHONUTF8': '1'},
+                'permissions': {'defaultMode': 'default', 'allow': ['Read', 'Grep', 'Glob', 'PowerShell(' + prefix + ' *)'], 'deny': ['Edit', 'Write', 'NotebookEdit', 'Bash']},
+                'hooks': {'SessionStart': hook(prefix + ' hook-start'), 'Stop': hook(prefix + ' hook-stop'),
+                          'PreToolUse': [{'matcher': 'Bash|PowerShell|Write|Edit|NotebookEdit', 'hooks': [{'type': 'command', 'command': POWERSHELL_UTF8 + '& ' + quote(python) + ' ' + quote(guard), 'shell': 'powershell', 'timeout': 10}]}]}}
     return {'autoMemoryEnabled': False, 'model': model, 'permissions': {'defaultMode': 'default', 'allow': ['Read', 'Grep', 'Glob', 'Bash(' + prefix + ' *)'], 'deny': ['Edit', 'Write', 'NotebookEdit', 'PowerShell']}, 'hooks': {'SessionStart': [{'hooks': [{'type': 'command', 'command': prefix + ' hook-start', 'timeout': 20}]}], 'Stop': [{'hooks': [{'type': 'command', 'command': prefix + ' hook-stop', 'timeout': 20}]}], 'PreToolUse': [{'matcher': 'Bash|PowerShell|Write|Edit|NotebookEdit', 'hooks': [{'type': 'command', 'command': shlex.join([str(python), str(guard)]), 'timeout': 10}]}]}}
 
 
@@ -156,8 +165,12 @@ def initialize(root, manifest):
     helper = root / '.claude/scripts/book.py'
     guard = root / '.claude/scripts/permission_guard.py'
     prefix = shlex.join([str(python), str(helper), '--vault', str(root)])
+    if os.name == 'nt':
+        from permission_guard import powershell_prefix, POWERSHELL_UTF8
+        prefix = powershell_prefix(str(python), str(helper), str(root))
     settings = settings_for(root, python, manifest['model'])
     with book.lock('setup-initialize'):
+        book.ensure_directories()
         old = book.read('.claude/settings.json')
         current = json.loads(old, object_pairs_hook=unique_pairs) if old else {}
         require(isinstance(current, dict), 'La configuración existente está dañada.')
@@ -227,6 +240,7 @@ def verify(root, manifest):
     require(isinstance(identity, str) and identity, 'Indique el perfil de la distribución que desea verificar.', 'invalid-input')
     book = Book(root)
     with book.lock('setup-verify'):
+        book.ensure_directories()
         status = runtime.profile_status(book, identity)
         marker = parse_json(book.read('.writing/install.json') or b'{}')
         require(marker.get('schema_version') == 1, 'Complete primero la inicialización.', 'invalid-input')

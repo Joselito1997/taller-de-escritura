@@ -11,7 +11,7 @@ Puedes traer el libro tal como lo tienes: capítulos, notas, conversaciones y ve
 
 ## Antes de empezar
 
-El agente de Claude Code se encarga de preparar la bóveda, instalar los complementos y abrir Obsidian. Al terminar debe dejar Claudian en español, en modo Seguro, listo para recibir los archivos de tu libro. Si la preparación todavía no terminó, pide al agente instalador que la complete; abrir estas notas por sí solo no demuestra que el taller esté preparado.
+El agente de Claude Code se encarga de preparar la bóveda, instalar los complementos y abrir Obsidian. Al terminar debe dejar Claudian en español, en el modo que elijas, Seguro o YOLO, listo para recibir los archivos de tu libro. Si la preparación todavía no terminó, pide al agente instalador que la complete; abrir estas notas por sí solo no demuestra que el taller esté preparado.
 
 Si falta alguna herramienta, el asistente debe explicar qué está disponible y qué no. Sin capacidad de guardado comprobada, no debe decir que modificó tu libro. Guarda tus cambios antes de pedir una aplicación y espera a que termine antes de seguir editando o mover tarjetas. Cuando no se pueda establecer esa pausa, la propuesta se conserva por separado.
 
@@ -24,7 +24,9 @@ Si falta alguna herramienta, el asistente debe explicar qué está disponible y 
 - [[importaciones/inventario|Inventario de importación]] indica originales, versiones y material por leer.
 - [[investigacion/indice|Biblioteca y rutas de lectura]] reúne notas de fuentes y sus límites.
 
-Las notas de personajes, relaciones, lugares y facciones se crean en `historia/` cuando hacen falta. Los planes van en `planes/`, las versiones alternativas en `alternativas/` y las bitácoras en `bitacora/`. No hay personajes ni capítulos inventados para llenar la bóveda. Los registros nuevos se enlazan desde el trabajo que los necesita.
+Todas las carpetas de contenido están presentes desde la instalación, aunque estén vacías. Al importar, cualquier información sobre personajes, relaciones, lugares o facciones se registra en `historia/`, aunque solo alcance para una nota breve. Los planes van en `planes/`, las versiones alternativas en `alternativas/` y las bitácoras en `bitacora/`. Las carpetas sin información permanecen vacías; no se inventan personajes, capítulos ni notas de relleno. Los registros nuevos se enlazan desde el trabajo que los necesita.
+
+- [[guia-del-taller/indice|Guía del taller y skills]] permite leer los procedimientos, las guías y las plantillas.
 
 ## Habla como escribes
 

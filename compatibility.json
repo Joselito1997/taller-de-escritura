@@ -23,17 +23,17 @@
         {
           "path": ".claude/scripts/book.py",
           "release_path": "libro/.claude/scripts/book.py",
-          "sha256": "bc73f50a89f49dac2292d51692838ec897a77186fd6a4464456e715bbe898012"
+          "sha256": "12fd4094c14176c7d3e50a4997f0e3aa93f37f4b43961d956821195f4f49929a"
         },
         {
           "path": ".claude/scripts/maintenance.py",
           "release_path": "libro/.claude/scripts/maintenance.py",
-          "sha256": "a61d4220b81330bd3d1f99ef5519c55d9f6fc7889f12524e4b4c72d5c4aaa365"
+          "sha256": "8fc373a67f55a27f30bdefdb08f964e9644f305b8f0345733fdf5e914a0cd376"
         },
         {
           "path": ".claude/scripts/permission_guard.py",
           "release_path": "libro/.claude/scripts/permission_guard.py",
-          "sha256": "6bb297df9a98971e0b9f3c8b611ce7f71a035863710354412e7391f99d8ce637"
+          "sha256": "63bc4cedae44d10a42d8d893fe92bbe7e2f4f43849ab39eac381c16e0adc3ee3"
         },
         {
           "path": ".claude/scripts/research.py",
@@ -43,17 +43,17 @@
         {
           "path": ".claude/scripts/runtime.py",
           "release_path": "libro/.claude/scripts/runtime.py",
-          "sha256": "e7cab3d819f1766bf34794f895d02d3a61fa7de9a0e1a20b5d7544d8d619bbf4"
+          "sha256": "55e4fd58b53b129c4ce5b353a30f880962f9294ce072c09c8d86b50276ca9be3"
         },
         {
           "path": ".claude/scripts/schemas.py",
           "release_path": "libro/.claude/scripts/schemas.py",
-          "sha256": "b74697a242e720fbc18a56e3f62de68ce33ce30aad756fe1cfd6e3eb71e70257"
+          "sha256": "ea8040a9cb0b9062b84c68d4511dba7dfa3881ebd7d9debc2e939857b1364351"
         },
         {
           "path": ".claude/scripts/setup.py",
           "release_path": "libro/.claude/scripts/setup.py",
-          "sha256": "935dcf26997407890f8632e1c4421e95736f71b446cc856e5ded3c43713aa71a"
+          "sha256": "350d0a86cee737222df2e5168e282374d3614d38182be7a773a9b7e4421a652a"
         },
         {
           "path": ".obsidian/plugins/realclaudian/main.js",
@@ -84,6 +84,11 @@
           "path": ".obsidian/plugins/obsidian-kanban/styles.css",
           "release_path": "vendor/kanban/plugin/styles.css",
           "sha256": "ecf6dd31f1727c441cce6f54794b0d3916dcfffc87fa17b855c79ba04a85d9a7"
+        },
+        {
+          "path": ".claude/scripts/windows_files.py",
+          "release_path": "libro/.claude/scripts/windows_files.py",
+          "sha256": "d8d377dd7792af85670594da8398d137309c8ac81de9e15898cebac720b204c9"
         }
       ],
       "evidence": {
@@ -116,7 +121,116 @@
             ]
           }
         }
+      },
+      "policy_amendment": {
+        "date": "2026-09-15",
+        "authority": "Jose: permitir Seguro y YOLO; no exigir cambios de versión global de Claude Code.",
+        "version_policy": "Las versiones de herramientas externas son procedencia; los hashes del helper y plugins distribuidos siguen comprobándose.",
+        "verification": "Deterministic checks only for the amendment. Historical UI evidence is not a new UI pass."
       }
+    },
+    {
+      "id": "windows-10-11-x64",
+      "enabled": true,
+      "platform": "windows",
+      "architecture": "AMD64",
+      "versions": {
+        "python": "3.13.5",
+        "claude_code": "not-observed",
+        "obsidian": "not-observed",
+        "claudian": "2.2.6",
+        "kanban": "2.0.51",
+        "os_version": "not-observed"
+      },
+      "installed_files": [
+        {
+          "path": ".claude/scripts/adapters.py",
+          "release_path": "libro/.claude/scripts/adapters.py",
+          "sha256": "9f4c8ed26701a19344656f607a092c9e29ae281d57bf0796b152d3160dc31634"
+        },
+        {
+          "path": ".claude/scripts/book.py",
+          "release_path": "libro/.claude/scripts/book.py",
+          "sha256": "12fd4094c14176c7d3e50a4997f0e3aa93f37f4b43961d956821195f4f49929a"
+        },
+        {
+          "path": ".claude/scripts/maintenance.py",
+          "release_path": "libro/.claude/scripts/maintenance.py",
+          "sha256": "8fc373a67f55a27f30bdefdb08f964e9644f305b8f0345733fdf5e914a0cd376"
+        },
+        {
+          "path": ".claude/scripts/permission_guard.py",
+          "release_path": "libro/.claude/scripts/permission_guard.py",
+          "sha256": "63bc4cedae44d10a42d8d893fe92bbe7e2f4f43849ab39eac381c16e0adc3ee3"
+        },
+        {
+          "path": ".claude/scripts/research.py",
+          "release_path": "libro/.claude/scripts/research.py",
+          "sha256": "38f538beca97bd8b68a16e5e4b31db79680dfb7e41811e44a624832748066898"
+        },
+        {
+          "path": ".claude/scripts/runtime.py",
+          "release_path": "libro/.claude/scripts/runtime.py",
+          "sha256": "55e4fd58b53b129c4ce5b353a30f880962f9294ce072c09c8d86b50276ca9be3"
+        },
+        {
+          "path": ".claude/scripts/schemas.py",
+          "release_path": "libro/.claude/scripts/schemas.py",
+          "sha256": "ea8040a9cb0b9062b84c68d4511dba7dfa3881ebd7d9debc2e939857b1364351"
+        },
+        {
+          "path": ".claude/scripts/setup.py",
+          "release_path": "libro/.claude/scripts/setup.py",
+          "sha256": "350d0a86cee737222df2e5168e282374d3614d38182be7a773a9b7e4421a652a"
+        },
+        {
+          "path": ".obsidian/plugins/realclaudian/main.js",
+          "release_path": "vendor/claudian/plugin/main.js",
+          "sha256": "1f97c1fef808434b87c1c1d033033afb65bdd44eb7747db92a4eef03732bdcea"
+        },
+        {
+          "path": ".obsidian/plugins/realclaudian/manifest.json",
+          "release_path": "vendor/claudian/plugin/manifest.json",
+          "sha256": "03daf2c5d330768f4b5b28f8426a4a9c2061c1f05137455d40ff95077199059a"
+        },
+        {
+          "path": ".obsidian/plugins/realclaudian/styles.css",
+          "release_path": "vendor/claudian/plugin/styles.css",
+          "sha256": "e9e77a6d919ab4d30aa0dc21bcaaed3f92d66640a73437b5920c1958796fdf21"
+        },
+        {
+          "path": ".obsidian/plugins/obsidian-kanban/main.js",
+          "release_path": "vendor/kanban/plugin/main.js",
+          "sha256": "30dd0c4166690443d8a8c78ec461b43545a266f441443f5f68466905b7076525"
+        },
+        {
+          "path": ".obsidian/plugins/obsidian-kanban/manifest.json",
+          "release_path": "vendor/kanban/plugin/manifest.json",
+          "sha256": "24976787097ead467969e014a35654e7a80e4db49a977689a48afadfa15e1854"
+        },
+        {
+          "path": ".obsidian/plugins/obsidian-kanban/styles.css",
+          "release_path": "vendor/kanban/plugin/styles.css",
+          "sha256": "ecf6dd31f1727c441cce6f54794b0d3916dcfffc87fa17b855c79ba04a85d9a7"
+        },
+        {
+          "path": ".claude/scripts/windows_files.py",
+          "release_path": "libro/.claude/scripts/windows_files.py",
+          "sha256": "d8d377dd7792af85670594da8398d137309c8ac81de9e15898cebac720b204c9"
+        }
+      ],
+      "evidence": {
+        "approved": false,
+        "id": "windows-native-implementation-not-live-tested",
+        "checks": []
+      },
+      "policy_amendment": {
+        "date": "2026-09-15",
+        "authority": "Jose: permitir Seguro y YOLO; no exigir cambios de versión global de Claude Code.",
+        "version_policy": "Las versiones de herramientas externas son procedencia; los hashes del helper y plugins distribuidos siguen comprobándose.",
+        "verification": "Native Windows implementation; no Windows host was available. No UI acceptance is claimed."
+      },
+      "verification_level": "implementation-only"
     }
   ]
 }

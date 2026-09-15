@@ -49,6 +49,83 @@ def claudian_modes(book):
     return CLAUDIAN_DEFAULT_SAFE_MODE, CLAUDIAN_DEFAULT_PERMISSION_MODE, None
 
 
+def layout(book):
+    from book import result
+    from schemas import VAULT_DIRECTORIES
+    directories = []
+    for name in VAULT_DIRECTORIES:
+        path = book.path(name)
+        exists = path.is_dir()
+        has_files = exists and any(p.is_file() and not p.is_symlink() for p in path.rglob('*'))
+        directories.append(dict(path=name, exists=exists, has_files=has_files))
+    missing = [row['path'] for row in directories if not row['exists']]
+    return result('layout', 'Se consultó el catálogo de carpetas sin modificarlo.', directories=directories, missing=missing, complete=not missing)
+
+
+def import_coverage(book):
+    """Comprueba el cierre declarado contra notas y fuentes reales; no infiere entidades con regex."""
+    from book import result, sha
+    from schemas import IMPORT_RECORDS, frontmatter, HASH
+    from maintenance import checked
+    issues, sources = [], {}
+    for path in book.path('.writing/imports').glob('*.json'):
+        ledger = checked(book.read(path.relative_to(book.root).as_posix()))
+        for source in ledger['sources']:
+            sources[source['preserved_path']] = source['sha256']
+        if ledger.get('failures'):
+            issues.append('Hay unidades de importación con fallos o lectura pendiente: ' + path.stem)
+    raw = book.read('importaciones/inventario.md')
+    metadata = frontmatter(raw)[0] if raw else {}
+    coverage = metadata.get('reconstruction')
+    coverage = coverage if isinstance(coverage, dict) else {}
+    reviewed = coverage.get('reviewed_sources')
+    reviewed = reviewed if isinstance(reviewed, dict) else {}
+    if not sources:
+        issues.append('No hay fuentes conservadas por la importación para comprobar este cierre.')
+    if reviewed != sources:
+        issues.append('El alcance revisado no coincide con todas las fuentes importadas y sus hashes.')
+    for path, digest in sources.items():
+        if sha(book.read(path)) != digest:
+            issues.append('La fuente conservada cambió: ' + path)
+    categories = coverage.get('categories')
+    categories = categories if isinstance(categories, dict) else {}
+    if set(categories) != set(IMPORT_RECORDS):
+        issues.append('Faltan categorías por revisar o hay categorías desconocidas.')
+    for name, (prefix, types) in IMPORT_RECORDS.items():
+        row = categories.get(name)
+        if not isinstance(row, dict) or row.get('status') not in ('recorded', 'no-source'):
+            issues.append('Categoría pendiente: ' + name)
+            continue
+        records = row.get('records')
+        if not isinstance(records, list):
+            issues.append('Falta la lista de notas de ' + name)
+            continue
+        if row['status'] == 'no-source':
+            if records or not isinstance(row.get('reason'), str) or not row['reason'].strip():
+                issues.append('La ausencia de información no está explicada: ' + name)
+            continue
+        if not records:
+            issues.append('Hay información declarada sin notas: ' + name)
+        for record in records:
+            path = record.get('path') if isinstance(record, dict) else None
+            digest = record.get('sha256') if isinstance(record, dict) else None
+            if not isinstance(path, str) or not (path.startswith(prefix) if prefix.endswith('/') else path == prefix) or not isinstance(digest, str) or not HASH.fullmatch(digest):
+                issues.append('Referencia de nota inválida: ' + name)
+                continue
+            data = book.read(path, shared=True)
+            if data is None or sha(data) != digest:
+                issues.append('Nota ausente o cambiada: ' + path)
+            elif validate(data)['metadata'].get('type') not in types:
+                issues.append('La nota no corresponde a su categoría: ' + path)
+    structure = layout(book)
+    issues.extend('Falta la carpeta ' + path for path in structure['missing'])
+    gaps = checkpoint_gaps(book)
+    issues.extend('Falta registrar en bitácora la operación ' + operation for operation in gaps)
+    return result('import-coverage', 'La cobertura declarada está comprobada.' if not issues else 'La reconstrucción tiene trabajo pendiente; no declare la importación completa.',
+                  complete=not issues, issues=issues, required_categories={k:v[0] for k,v in IMPORT_RECORDS.items()},
+                  source_scope=sources, semantic_coverage='Declarada por el asistente; esta comprobación no demuestra que haya detectado todas las menciones.')
+
+
 def search(book, manifest):
     from book import result, sha
     scope, query = manifest.get('scope'), manifest.get('query')
@@ -116,8 +193,12 @@ def checkpoint_gaps(book):
         if target.startswith('bitacora/'):
             data = book.read(target)
             if validate(data)['metadata'].get('role') == 'primary':
-                logs.append(data.decode())
+                # Una mención en Pendientes o Próximo paso no acredita un guardado.
+                section = re.search(r'^## Puntos de guardado[ \t]*\r?\n(.*?)(?=^## |\Z)', data.decode(), re.M | re.S)
+                if section:
+                    logs.append(section[1])
     text = '\n'.join(logs)
+    mentioned = lambda identity: re.search(r'(?<![A-Za-z0-9_-])' + re.escape(identity) + r'(?![A-Za-z0-9_-])', text) is not None
     missing = []
     for path in book.path('.writing/operations').glob('*.json'):
         try:
@@ -125,11 +206,11 @@ def checkpoint_gaps(book):
         except Problem:
             continue  # session_context informa el diario dañado; el hook no debe fallar por ello.
         hashes = [w['candidate_sha256'] for w in journal['manifest']['writes'] if w['format'] != 'session-log']
-        if path.stem not in text and hashes and not all(digest in text for digest in hashes):
+        if not mentioned(path.stem) and hashes and not all(digest in text for digest in hashes):
             missing.append(path.stem)
     for directory in ('imports','research'):
         for path in book.path('.writing/'+directory).glob('*.json'):
-            if path.stem not in text:
+            if not mentioned(path.stem):
                 missing.append(path.relative_to(book.root).as_posix())
     return missing
 
@@ -281,8 +362,8 @@ def readiness(book):
             except Problem:
                 safe_mode = permission_mode = source = None
                 notes.append('No se pudo leer ' + CLAUDIAN_SETTINGS + '; no se deduce el modo de confirmación de Claudian.')
-            if safe_mode is not None and (safe_mode != 'default' or permission_mode != 'normal'):
-                notes.append('Claudian debe declarar a la vez permissionMode normal (ahora ' + json.dumps(permission_mode) + ') y el modo de confirmación default (ahora ' + safe_mode + ') en ' + (source or CLAUDIAN_SETTINGS) + '; YOLO o PLAN deciden antes que safeMode y ninguno de los dos basta por separado.')
+            if permission_mode == 'plan':
+                notes.append('Claudian está en PLAN: esta sesión prepara propuestas sin aplicar cambios.')
         plugins[identity] = {'present': manifest is not None and binary is not None, 'version': parse_json(manifest).get('version') if manifest else None, 'main_sha256': sha(binary), 'matches_pinned_spanish_artifact': matches, 'enabled_observed': False}
     profile = profile_status(book)
     registration = marker.get('verified_profile', {})
@@ -294,7 +375,7 @@ def readiness(book):
     hooks['observed'] = same and observations['hooks_observed'] and recorded.get('hooks_observed') is True
     permissions = dict(observed=same and observations['permissions_observed'] and recorded.get('permissions_observed') is True)
     if not permissions['observed']:
-        notes.append('Verifique el modo principal de Claudian y las denegaciones reales; «Seguro» por sí solo no demuestra permisos restringidos.')
+        notes.append('No hay evidencia aplicable de denegaciones reales en esta combinación; «Seguro» por sí solo no demuestra permisos restringidos.' + (' Es un límite de la evidencia histórica, no un bloqueo de guardado.' if available else ''))
     return result('readiness', 'Se comprobó la disponibilidad del helper; cada aplicación requiere la pausa actual del autor.', notices=notes, install=marker, hooks=hooks, permissions=permissions, session=session, plugins=plugins, cooperative_profile=profile, write_mode='cooperative' if available else 'candidate-only', ready=available, ready_scope='guarded-apply-only')
 
 
@@ -361,7 +442,11 @@ RUNTIME_HOOK_EVENTS = {'SessionStart', 'Stop', 'PreToolUse'}
 def runtime_observations(status):
     """Hooks y denegaciones reales solo desde evidence.runtime_observations de un perfil elegible; nunca por archivos, flags ni los controles de editor."""
     from schemas import HASH
-    eligible = isinstance(status, dict) and status.get('eligible') is True
+    eligible = (isinstance(status, dict) and status.get('eligible') is True
+                and status.get('evidence', {}).get('approved') is True
+                and not status.get('version_differences')
+                and status.get('permission_mode', 'normal') == 'normal'
+                and status.get('safe_mode', 'default') == 'default')
     observed = status['evidence'].get('runtime_observations') if eligible else None
     observed = observed if isinstance(observed, dict) else {}
 
@@ -407,8 +492,11 @@ def profile_status(book, requested=None):
         matching = [p for p in profiles if isinstance(p, dict) and p.get('id') == identity]
         require(len(matching) == 1, 'El perfil no existe o es ambiguo.', 'cooperative-unavailable')
         profile = matching[0]; evidence = profile.get('evidence', {})
-        require(profile.get('enabled') is True and profile.get('platform') == platform.system().lower() and profile['platform'] == 'darwin' and profile.get('architecture') == platform.machine(), 'El perfil no está habilitado para esta plataforma.', 'cooperative-unavailable')
-        require(isinstance(evidence, dict) and evidence.get('approved') is True and isinstance(evidence.get('id'), str) and evidence['id'] and isinstance(evidence.get('sha256'), str) and HASH.fullmatch(evidence['sha256']) and isinstance(evidence.get('checks'), list) and COOPERATIVE_CHECKS <= set(evidence['checks']), 'Falta la aprobación de las comprobaciones observadas de UI.', 'cooperative-unavailable')
+        require(profile.get('enabled') is True and profile.get('platform') == platform.system().lower() and profile['platform'] in ('darwin', 'windows') and profile.get('architecture', '').casefold() == platform.machine().casefold(), 'El perfil no está habilitado para esta plataforma.', 'cooperative-unavailable')
+        native_windows = profile['platform'] == 'windows' and profile.get('verification_level') == 'implementation-only'
+        require(native_windows or isinstance(evidence, dict) and evidence.get('approved') is True and isinstance(evidence.get('id'), str) and evidence['id'] and isinstance(evidence.get('sha256'), str) and HASH.fullmatch(evidence['sha256']) and isinstance(evidence.get('checks'), list) and COOPERATIVE_CHECKS <= set(evidence['checks']), 'Falta la aprobación de las comprobaciones observadas de UI.', 'cooperative-unavailable')
+        if native_windows:
+            require(platform.version().split('.')[0] == '10', 'Esta ruta está preparada para Windows 10 y 11.', 'cooperative-unavailable')
         versions = profile.get('versions', {})
         require(isinstance(versions, dict) and all(isinstance(versions.get(k), str) and versions[k] for k in ('python','claude_code','obsidian','claudian','kanban','os_version')), 'El perfil no identifica todas las versiones.', 'cooperative-unavailable')
         installed = profile.get('installed_files')
@@ -420,10 +508,13 @@ def profile_status(book, requested=None):
         for entry in installed:
             require(isinstance(entry['sha256'], str) and HASH.fullmatch(entry['sha256']) and distributed.get(entry['release_path']) == entry['sha256'], 'Un artefacto no coincide con el manifiesto de distribución.', 'cooperative-unavailable')
             require(sha(package.read(entry['release_path'])) == entry['sha256'] and sha(book.read(entry['path'])) == entry['sha256'], 'Los bytes instalados o distribuidos cambiaron.', 'cooperative-unavailable')
-        actual = {'python': platform.python_version(), 'os_version': platform.mac_ver()[0]}
-        run = subprocess.run(['claude','--version'], capture_output=True, text=True, timeout=10)
-        require(run.returncode == 0 and run.stdout.strip(), 'No se pudo comprobar Claude Code.', 'cooperative-unavailable')
-        actual['claude_code'] = run.stdout.split()[0]
+        actual = {'python': platform.python_version(), 'os_version': platform.version() if native_windows else platform.mac_ver()[0]}
+        # La versión global es procedencia, no autorización para guardar el libro.
+        try:
+            run = subprocess.run(['claude','--version'], capture_output=True, text=True, timeout=10)
+            actual['claude_code'] = run.stdout.split()[0] if run.returncode == 0 and run.stdout.strip() else None
+        except (OSError, subprocess.SubprocessError):
+            actual['claude_code'] = None
         for name in ('claudian','kanban'):
             manifests = [e for e in installed if e['release_path'].startswith('vendor/'+name+'/') and e['path'].endswith('/manifest.json')]
             require(len(manifests) == 1, 'Falta el manifiesto instalado de ' + name + '.', 'cooperative-unavailable')
@@ -434,14 +525,13 @@ def profile_status(book, requested=None):
             if name == 'claudian':
                 safe_mode, permission_mode, source = claudian_modes(book)
                 require(source is not None, 'Falta la configuración real de Claudian; no se deduce el modo desde los valores por defecto.', 'cooperative-unavailable')
-                require(permission_mode == 'normal', 'Claudian debe declarar permissionMode normal (Seguro) en ' + str(source) + '; YOLO o PLAN deciden antes que safeMode y un valor ausente o no verificado no se da por normal.', 'cooperative-unavailable')
-                require(safe_mode == 'default', 'Claudian debe declarar providerConfigs.claude.safeMode default en ' + str(source) + '; normal por sí solo no basta.', 'cooperative-unavailable')
-        require(all(actual[key] == versions[key] for key in actual), 'Una versión comprobable cambió; vuelva a verificar la combinación.', 'cooperative-unavailable')
+                require(permission_mode in ('normal', 'yolo'), 'El modo permissionMode de Claudian es PLAN o no se reconoce; se conserva la propuesta sin aplicar.', 'cooperative-unavailable')
+        differences = {key: {'observed': versions[key], 'current': value} for key, value in actual.items() if value != versions[key]}
         settings = book.read('.claude/settings.json')
         require(settings is not None and sha(settings) == marker.get('generated_files', {}).get('.claude/settings.json'), 'La configuración local cambió.', 'cooperative-unavailable')
         config = parse_json(settings)
         import setup
-        expected_settings = setup.settings_for(book.root, book.root.parent / '.venv/bin/python', marker.get('model'))
+        expected_settings = setup.settings_for(book.root, book.root.parent / ('.venv/Scripts/python.exe' if native_windows else '.venv/bin/python'), marker.get('model'))
         require(all(config.get(key) == value for key, value in expected_settings.items()), 'La configuración no coincide con la ruta generada del helper.', 'cooperative-unavailable')
         requirements = package.read('requirements.lock')
         require(requirements is not None and distributed.get('requirements.lock') == sha(requirements), 'El archivo de dependencias no coincide con la distribución.', 'cooperative-unavailable')
@@ -456,7 +546,7 @@ def profile_status(book, requested=None):
             overrides = parse_json(local)
             require(isinstance(overrides, dict) and set(overrides) <= LOCAL_SETTINGS_BENIGN, '.claude/settings.local.json cambia ajustes que el perfil no verificó (' + ', '.join(sorted(set(overrides) - LOCAL_SETTINGS_BENIGN)) + '); se conservan las propuestas por separado. Retire esos ajustes o vuelva a verificar la combinación.' if isinstance(overrides, dict) else '.claude/settings.local.json no es un objeto de configuración; se conservan las propuestas por separado.', 'cooperative-unavailable')
         require(config.get('autoMemoryEnabled') is False and config.get('disableAllHooks') is not True and config.get('permissions', {}).get('defaultMode') == 'default' and {'Edit','Write','NotebookEdit'} <= set(config.get('permissions', {}).get('deny', [])) and config.get('hooks', {}).get('PreToolUse'), 'La configuración no conserva el contrato de permisos.', 'cooperative-unavailable')
-        return dict(eligible=True, profile_id=identity, compatibility_sha256=sha(compatibility_bytes), release_manifest_sha256=sha(release_bytes), checked_versions=actual, ui_observed_versions={'obsidian':versions['obsidian']}, current_renderer_checked=False, evidence=evidence)
+        return dict(eligible=True, profile_id=identity, compatibility_sha256=sha(compatibility_bytes), release_manifest_sha256=sha(release_bytes), checked_versions=actual, version_differences=differences, permission_mode=permission_mode, safe_mode=safe_mode, ui_observed_versions={'obsidian':versions['obsidian']}, current_renderer_checked=False, evidence=evidence)
     except (Problem, OSError, ValueError, TypeError, KeyError, AttributeError, ImportError, subprocess.SubprocessError) as exc:
         return dict(eligible=False, reason=exc.message if isinstance(exc, Problem) else 'No se pudo verificar el perfil; se conserva la propuesta por separado.')
 

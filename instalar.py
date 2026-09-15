@@ -23,6 +23,10 @@ PANDOC_URL = 'https://github.com/jgm/pandoc/releases/download/3.10.2/pandoc-3.10
 PANDOC_SHA = 'a30bd546062f0b29c25f45a71f951b7a1cf4f998d5b43974ea2c2416133f2e99'
 RESULT = 'installation-result.json'
 
+def runtime_bin(target):
+    return target / '.venv' / ('Scripts' if os.name == 'nt' else 'bin')
+
+
 
 def require(condition, message):
     if not condition:
@@ -98,22 +102,26 @@ def ensure_pandoc(target, env):
     if existing:
         version = subprocess.check_output([existing, '--version'], text=True).splitlines()[0]
         if version == 'pandoc 3.10.2':
-            destination = target / '.venv/bin/pandoc'
+            destination = runtime_bin(target) / ('pandoc.exe' if os.name == 'nt' else 'pandoc')
             if not destination.exists():
-                destination.symlink_to(Path(existing).resolve())
+                shutil.copyfile(existing, destination) if os.name == 'nt' else destination.symlink_to(Path(existing).resolve())
             return
+    url, digest = PANDOC_URL, PANDOC_SHA
+    if os.name == 'nt':
+        url = 'https://github.com/jgm/pandoc/releases/download/3.10.2/pandoc-3.10.2-windows-x86_64.zip'
+        digest = '52487faaa63f8cef5363d5a771097da001228d61c6f44f32ed41b27a98c0278c'
     archive = target / '.installer/pandoc.zip'
     if not archive.exists():
         partial = archive.with_suffix('.download')
-        subprocess.run(['curl', '--fail', '--location', '--proto', '=https', '--tlsv1.2', '--max-time', '180', PANDOC_URL, '-o', str(partial)], check=True, capture_output=True)
-        require(sha(partial.read_bytes()) == PANDOC_SHA, 'La descarga de Pandoc no coincide con su huella.')
+        subprocess.run(['curl', '--fail', '--location', '--proto', '=https', '--tlsv1.2', '--max-time', '180', url, '-o', str(partial)], check=True, capture_output=True)
+        require(sha(partial.read_bytes()) == digest, 'La descarga de Pandoc no coincide con su huella.')
         os.replace(partial, archive)
-    require(sha(archive.read_bytes()) == PANDOC_SHA, 'La descarga de Pandoc no coincide con su huella.')
+    require(sha(archive.read_bytes()) == digest, 'La descarga de Pandoc no coincide con su huella.')
     with zipfile.ZipFile(archive) as z:
-        candidates = [n for n in z.namelist() if n.endswith('/bin/pandoc')]
+        candidates = [n for n in z.namelist() if n.endswith('/pandoc.exe' if os.name == 'nt' else '/bin/pandoc')]
         require(len(candidates) == 1, 'El paquete de Pandoc no tiene la estructura esperada.')
         binary = z.read(candidates[0])
-    destination = target / '.venv/bin/pandoc'
+    destination = runtime_bin(target) / ('pandoc.exe' if os.name == 'nt' else 'pandoc')
     require(not destination.exists() and not destination.is_symlink(), 'Ya hay un conversor distinto en el entorno; se conserva.')
     destination.write_bytes(binary)
     destination.chmod(0o755)
@@ -146,15 +154,15 @@ def prepare(source, target, model, claude, backup):
                 f.write(body)
     write_json(target / 'release-manifest.json', manifest)
     backup.mkdir(parents=True, exist_ok=True)
-    env = {**os.environ, 'PYTHONDONTWRITEBYTECODE': '1', 'PIP_CACHE_DIR': str(target / '.installer/pip-cache'), 'PATH': str(target / '.venv/bin') + os.pathsep + str(Path(claude).parent) + os.pathsep + os.environ.get('PATH', '')}
+    env = {**os.environ, 'PYTHONDONTWRITEBYTECODE': '1', 'PYTHONUTF8': '1', 'PIP_CACHE_DIR': str(target / '.installer/pip-cache'), 'PATH': str(runtime_bin(target)) + os.pathsep + str(Path(claude).parent) + os.pathsep + os.environ.get('PATH', '')}
     environment = target / '.venv'
-    python = environment / 'bin/python'
+    python = runtime_bin(target) / ('python.exe' if os.name == 'nt' else 'python')
     if python.exists():
         check = subprocess.run([str(python), '-c', 'import sys; print(sys.version)'], capture_output=True, text=True)
         if check.returncode != 0:
             environment.rename(target / '.installer' / ('incomplete-venv-' + uuid.uuid4().hex[:8]))
     if not python.exists():
-        venv.EnvBuilder(with_pip=True, symlinks=True).create(environment)
+        venv.EnvBuilder(with_pip=True, symlinks=os.name != 'nt').create(environment)
     run_json([sys.executable, target / 'libro/.claude/scripts/setup.py', 'initialize'], env,
              {'schema_version': 1, 'operation_id': 'agent-install-' + uuid.uuid4().hex[:12], 'consent': True,
               'model': model, 'backup_destination': str(backup), 'install_dependencies': True, 'release_manifest': manifest})
@@ -281,6 +289,9 @@ def wait_for_renderer(evaluate, vault, identity, after=None, timeout=90):
 
 
 def open_and_start(target, app, profile, timeout):
+    if os.name == 'nt':
+        from installation.windows_start import open_and_start_windows
+        return open_and_start_windows(target, app, profile, timeout)
     previous_result = read_json(target / RESULT)
     resuming = previous_result.get('status') == 'complete' or (previous_result.get('status') == 'checking' and previous_result.get('previousStatus') == 'complete')
     if resuming:
@@ -379,14 +390,23 @@ def main():
     parser.add_argument('--dest', type=Path, default=Path.home() / 'Taller de escritura')
     parser.add_argument('--model', default='opus')
     parser.add_argument('--backup', type=Path)
-    parser.add_argument('--obsidian-app', type=Path, default=Path('/Applications/Obsidian.app'))
-    parser.add_argument('--obsidian-profile', type=Path, default=Path.home() / 'Library/Application Support/obsidian')
+    parser.add_argument('--obsidian-app', type=Path, default=None)
+    parser.add_argument('--obsidian-profile', type=Path, default=None)
     parser.add_argument('--prepare-only', action='store_true')
     parser.add_argument('--timeout', type=int, default=300)
     args = parser.parse_args()
     try:
         require(args.consent, 'Falta la petición explícita de instalar el taller.')
-        require(platform.system() == 'Darwin' and platform.machine() == 'arm64', 'Solo se ha comprobado macOS Apple Silicon.')
+        require((platform.system() == 'Darwin' and platform.machine() == 'arm64') or (platform.system() == 'Windows' and platform.machine().lower() in ('amd64', 'x86_64')), 'Esta entrega prepara macOS Apple Silicon y Windows 10/11 x64.')
+        if args.obsidian_app is None:
+            if os.name == 'nt':
+                candidates = [Path(os.environ.get('LOCALAPPDATA', '')) / folder / 'Obsidian.exe' for folder in ('Obsidian', 'Programs/Obsidian')]
+                candidates += [Path(os.environ.get('PROGRAMFILES', 'C:/Program Files')) / 'Obsidian/Obsidian.exe']
+                args.obsidian_app = next((p for p in candidates if p.is_file()), candidates[0])
+            else:
+                args.obsidian_app = Path('/Applications/Obsidian.app')
+        if args.obsidian_profile is None:
+            args.obsidian_profile = Path(os.environ['APPDATA']) / 'obsidian' if os.name == 'nt' else Path.home() / 'Library/Application Support/obsidian'
         require(platform.python_version() == '3.13.5', 'Ejecute instalar.sh para preparar el Python comprobado.')
         require(args.model and not any(c.isspace() for c in args.model), 'Identificador de modelo inválido.')
         require(not args.dest.is_symlink(), 'El destino no puede ser un enlace simbólico.')
@@ -394,7 +414,7 @@ def main():
         require(target != SOURCE and SOURCE not in target.parents, 'La copia privada debe quedar fuera del repositorio fuente.')
         claude = shutil.which('claude')
         require(claude is not None, 'No se encuentra el Claude Code del usuario.')
-        require(args.obsidian_app.is_dir(), 'Instale Obsidian antes de pedir la preparación.')
+        require(args.obsidian_app.is_file() if os.name == 'nt' else args.obsidian_app.is_dir(), 'Instale Obsidian antes de pedir la preparación.')
         backup = (args.backup or target.with_name(target.name + ' - respaldos')).expanduser().resolve()
         require(backup != target and target not in backup.parents, 'El respaldo debe quedar fuera del libro.')
         print('Preparando ' + str(target) + ' con Claude ' + args.model + '.', flush=True)

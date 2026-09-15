@@ -10,22 +10,23 @@ Ya usas Claude Code con tu cuenta. Solo necesitas instalar [Obsidian](https://ob
 
 El agente se encarga de la instalación. No necesitas instalar Python, copiar plugins, crear columnas, elegir rutas internas ni pegar comandos en Terminal. Si tu sistema pide un permiso que solo tú puedes conceder, el agente te explicará esa acción concreta en español.
 
-Al terminar, Obsidian debe estar abierto con el tablero y Claudian en español, en modo **Seguro**, y una respuesta que te invite a traer tu material. Todavía no se importa nada ni se inventa tu historia.
+Al terminar, Obsidian debe estar abierto con el tablero y Claudian en español, en el modo de permisos elegido, **Seguro o YOLO**, y una respuesta que te invite a traer tu material. Todavía no se importa nada ni se inventa tu historia.
 
 ## Qué prepara el agente
 
-Claude Code sigue [las instrucciones de instalación](CLAUDE.md) y ejecuta `instalar.sh`. El instalador:
+Claude Code sigue [las instrucciones de instalación](CLAUDE.md) y ejecuta `instalar.sh` en macOS o `instalar.ps1` en Windows. El instalador:
 
 - Conserva el repositorio descargado como fuente y prepara una copia privada independiente en una carpeta local.
 - Prepara Python 3.13.5 y las dependencias fijadas en el entorno del taller, sin instalar paquetes globales ni cambiar archivos de configuración del shell.
 - Prepara Pandoc 3.10.2 para exportar a Word.
 - Instala los archivos incluidos de Claudian 2.2.6 es.4 y Kanban 2.0.51. No descarga otras versiones desde el catálogo ni exige compilar los plugins.
-- Usa el Claude Code y la cuenta que ya tienes. El agente puede conservar el modelo de su sesión; el valor inicial comprobado del instalador es `opus`. Puedes cambiar tu elección después desde Claudian.
+- Usa el Claude Code y la cuenta que ya tienes, sin cambiar ni rebajar su versión global. El agente puede conservar el modelo de su sesión; el valor inicial comprobado del instalador es `opus`. Puedes cambiar tu elección después desde Claudian. Seguro y YOLO permiten guardar con el helper; el taller conserva originales, versiones y detección de cambios en ambos modos.
+- Crea todas las carpetas de contenido del catálogo, aunque estén vacías. La importación añade cualquier información disponible en sus notas correspondientes, sin exigir una cantidad mínima.
 - Crea un destino de respaldo local separado del libro. Una segunda carpeta en el mismo equipo no sustituye un respaldo fuera del equipo.
 - Registra la bóveda en Obsidian, conserva los demás registros, configura español y activa su interfaz de comandos para completar la preparación.
 - Comprueba los plugins cargados, el modo de permisos, el perfil de escritura y el tablero. Después abre Claudian y le envía una petición de bienvenida identificada como preparación automática.
 
-La preparación no copia credenciales de otra persona, no publica el libro y no hace commits ni push del manuscrito. La bóveda conserva su organización en `libro/`. Las instrucciones de escritura viven dentro de esa carpeta.
+La preparación no copia credenciales de otra persona, no publica el libro y no hace commits ni push del manuscrito. La bóveda conserva su organización en `libro/`. Las instrucciones de escritura viven dentro de esa carpeta. Puedes leer las skills y sus referencias desde [Guía del taller](libro/guia-del-taller/indice.md).
 
 ## Tu primera conversación
 
@@ -43,9 +44,9 @@ Después puedes pedir cosas normales: «Quiero planear el próximo capítulo», 
 
 ## Alcance de esta entrega
 
-Esta ruta se comprobó con Claude Code clonando una copia Git limpia, preparando las dependencias locales y dejando Obsidian abierto con una bienvenida real de Claudian. También se comprobó una segunda ejecución sin repetir la bienvenida ni cambiar la conversación, y la conservación de una nota y una preferencia editadas. No se pidió material del libro durante la instalación.
+La entrega anterior, 0.1.1, se comprobó en Mac con Claude Code clonando una copia Git limpia, preparando las dependencias locales y dejando Obsidian abierto con una bienvenida real de Claudian. También se comprobó una segunda ejecución sin repetir la bienvenida ni cambiar la conversación, y la conservación de una nota y una preferencia editadas. No se pidió material del libro durante la instalación. Los cambios de 0.1.2 tienen comprobaciones automatizadas separadas; aquella prueba de interfaz no valida por sí sola esta revisión ni la instalación de Windows.
 
-El perfil de escritura comprobado es macOS 26.5.1 en Apple Silicon, Obsidian 1.13.7, Python 3.13.5, Claude Code 2.1.270, Claudian 2.2.6 es.4 y Kanban 2.0.51. Pandoc 3.10.2 permite exportar DOCX. Windows, Linux, otros Mac, móvil y escritura simultánea desde varios dispositivos no están comprobados.
+El perfil de escritura comprobado es macOS 26.5.1 en Apple Silicon, Obsidian 1.13.7, Python 3.13.5, Claude Code 2.1.270, Claudian 2.2.6 es.4 y Kanban 2.0.51. Pandoc 3.10.2 permite exportar DOCX. También se incluye una instalación nativa para Windows 10 y 11 x64, mediante `instalar.ps1`, PowerShell y `Obsidian.com`. Está implementada pero todavía no se ha ejecutado en Windows: no afirmamos que esa experiencia esté verificada. Linux, Windows ARM, otros Mac, móvil y escritura simultánea desde varios dispositivos quedan fuera de esta entrega.
 
 El autor conserva las decisiones y guarda y pausa la edición cuando autoriza aplicar un cambio. La aplicación protegida conserva hashes, versiones y detección de cambios intermedios. No bloquea toda la memoria de Obsidian. Una combinación que no cumpla las comprobaciones no obtiene permiso de escritura por declarar éxito en un instalador.
 
