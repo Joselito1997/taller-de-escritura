@@ -27,13 +27,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "a62b3c54feba6381191aacbbbbd62ce4959d0a7a6ad885e57496269cd4974bae",
-      "size": 9208
+      "sha256": "2b95fe7811a35169b3b335f0e152dce8a54b00f7baa532eebf4b9925be029b14",
+      "size": 9322
     },
     {
       "path": "compatibility.json",
       "sha256": "4d796078b4be0c8e4eb85d68e8e5919bbfada11bdfb592ce5f24fa2f2361db04",
       "size": 9841
+    },
+    {
+      "path": "docs/images/taller-de-escritura.png",
+      "sha256": "58a82ef6e4ece208a6d014878e086bcfb1c13d05ebadd8fe64f503076e3e344b",
+      "size": 497085
     },
     {
       "path": "instalar.ps1",
@@ -707,8 +712,8 @@
     },
     {
       "path": "release-allowlist.json",
-      "sha256": "e4ddad2c5f0f22c8080e4cc3a022c9d025886a28c61d41b4987f47326a7003ee",
-      "size": 2007
+      "sha256": "909c64bf5e587a632383c6338db0f53d16dfba21cf97d4b6c932cc2a47670116",
+      "size": 2050
     },
     {
       "path": "requirements.lock",
