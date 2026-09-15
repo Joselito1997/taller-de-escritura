@@ -4,6 +4,8 @@ Un espacio en Obsidian para trabajar tu libro y conversar con Claude en español
 
 ![Un capítulo abierto en Obsidian, con el asistente Claudian a la derecha](docs/images/taller-de-escritura.png)
 
+![Vista gráfica de las conexiones entre las notas del taller en Obsidian](docs/images/grafo-del-taller.png)
+
 ## Cómo empezar
 
 Ya usas Claude Code con tu cuenta. Solo necesitas instalar [Obsidian](https://obsidian.md/download) y darle a Claude Code el enlace de este repositorio:

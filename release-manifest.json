@@ -27,13 +27,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "2b95fe7811a35169b3b335f0e152dce8a54b00f7baa532eebf4b9925be029b14",
-      "size": 9322
+      "sha256": "3e6c575d36341c31245a7a5f57dad79e0fd4d19571d5944b5068b6919ee9304c",
+      "size": 9432
     },
     {
       "path": "compatibility.json",
       "sha256": "4d796078b4be0c8e4eb85d68e8e5919bbfada11bdfb592ce5f24fa2f2361db04",
       "size": 9841
+    },
+    {
+      "path": "docs/images/grafo-del-taller.png",
+      "sha256": "9e772c78cfdea805d392d1af01953dba6cc4f383bf1c7222117f5393d74933a4",
+      "size": 697948
     },
     {
       "path": "docs/images/taller-de-escritura.png",
@@ -712,8 +717,8 @@
     },
     {
       "path": "release-allowlist.json",
-      "sha256": "909c64bf5e587a632383c6338db0f53d16dfba21cf97d4b6c932cc2a47670116",
-      "size": 2050
+      "sha256": "38f2ee3160c3d7d5fac241915eacee64c08799034efc92ddc3bf3999d180f091",
+      "size": 2090
     },
     {
       "path": "requirements.lock",
